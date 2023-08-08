@@ -72,6 +72,7 @@ const ViableStartupCalculator: React.FC = () => {
     "",
     "",
   ]);
+  const [businessLabels, setBusinessLabels] = useState<string[]>(["", ""]);
 
   const handleInputOptionChange = (index: number, option: string) => {
     setSelectedOptions((prevOptions) => {
@@ -81,22 +82,16 @@ const ViableStartupCalculator: React.FC = () => {
     });
   };
 
-  const exampleData = [
-    // Replace this with your actual example data
-    { result: 10000000, option: "10,000,000" },
-    { result: 0.01, option: "0.01: Few agree or care" },
-    { result: 10000, option: "$10,000" },
-    { result: 0.01, option: "0.01: Every few years" },
-    { result: 0.1, option: "0.1: Structural/trust challenges" },
-    { result: 0.5, option: "0.5: Some best-in-class features" },
-    { result: 0.1, option: "0.1 : One-off purchase with evangelism" },
-  ];
-
-  const handleFillExampleData = () => {
+  const handleFillExampleData = (
+    exampleBusinessName: string,
+    exampleBusinessH1: string,
+    exampleData: { result: number; option: string }[]
+  ) => {
     const exampleResults = exampleData.map((data) => data.result);
     setInputResults(exampleResults);
     const exampleOptions = exampleData.map((data) => data.option);
     setSelectedOptions(exampleOptions);
+    setBusinessLabels([exampleBusinessName, exampleBusinessH1]);
   };
 
   const handleInputResultChange = (index: number, result: number) => {
@@ -226,7 +221,49 @@ const ViableStartupCalculator: React.FC = () => {
           value: 0.5,
           label: "0.5 : Recurring-revenue + recurring-problem",
         },
-        { value: 1.0, label: "1.0 : Strong lock-in " },
+        { value: 1.0, label: "1.0 : Strong lock-in" },
+      ],
+    },
+  ];
+
+  const exampleArray = [
+    {
+      businessName: "WP Engine",
+      businessH1: "Hosting for WordPress",
+      data: [
+        { result: 100000000, option: "100,000,000" },
+        { result: 0.1, option: "0.1: Thought-leaders care/evangelize" },
+        { result: 100, option: "$100" },
+        { result: 0.01, option: "0.01: Every few years" },
+        { result: 0.5, option: "0.5: Indifferent" },
+        { result: 0.5, option: "0.5: Some best-in-class features" },
+        { result: 1.0, option: "1.0 : Strong lock-in" },
+      ],
+    },
+    {
+      businessName: "ConvertKit",
+      businessH1: "Marketing for creators",
+      data: [
+        { result: 10000000, option: "10,000,000" },
+        { result: 1.0, option: "1.0: Hard to find someone who doesn't care" },
+        { result: 100, option: "$100" },
+        { result: 0.01, option: "0.01: Every few years" },
+        { result: 0.5, option: "0.5: Indifferent" },
+        { result: 0.5, option: "0.5: Some best-in-class features" },
+        { result: 0.5, option: "0.5 : Recurring-revenue + recurring-problem" },
+      ],
+    },
+    {
+      businessName: "Consumer Security",
+      businessH1: "Help people protect their data",
+      data: [
+        { result: 1000000000, option: "1,000,000,000" },
+        { result: 0.01, option: "0.01: Few agree or care" },
+        { result: 10, option: "$10" },
+        { result: 0.01, option: "0.01: Every few years" },
+        { result: 0.5, option: "0.5: Indifferent" },
+        { result: 0.1, option: "0.1: No material differentiation" },
+        { result: 0.5, option: "0.5 : Recurring-revenue + recurring-problem" },
       ],
     },
   ];
@@ -249,54 +286,56 @@ const ViableStartupCalculator: React.FC = () => {
               Result: {calculateResult(totalResult)}
             </div>
           </div>
-          <div className="flex items-center mt-2 px-4 text-xs text-black gap-4">
-            <div>Examples:</div>
-            <button
-              className="border border-gray-300 p-1"
-              onClick={handleFillExampleData}
-            >
-              WP Engine
-            </button>
-            <button
-              className="border border-gray-300 p-1"
-              onClick={handleFillExampleData}
-            >
-              WP Engine
-            </button>
-            <button
-              className="border border-gray-300 p-1"
-              onClick={handleFillExampleData}
-            >
-              WP Engine
-            </button>
-          </div>
-          <div className="px-4 mt-6">
-            <div className="bg-gray-300 h-0.5"></div>
-          </div>
-          <div className="px-4 rounded-lg mt-4">
-            <div className="py-2 pb-1">
-              <label className="block">
-                <span className="text-black">Name of startup</span>
-                <div className="text-[9px] pb-1">
-                  Helpful for capturing the business in one word
-                </div>
-                <input
-                  className="form-input block w-full rounded-md bg-white-200 text-black text-sm p-2 h-5"
-                  type="text"
-                />
-              </label>
+          <div>
+            <div className="flex items-center mt-2 px-4 text-xs text-black gap-4">
+              <div>Examples:</div>
+              {exampleArray.map((example) => (
+                <button
+                  className="border border-gray-300 py-1 px-2 rounded-lg"
+                  onClick={() =>
+                    handleFillExampleData(
+                      example.businessName,
+                      example.businessH1,
+                      example.data
+                    )
+                  }
+                >
+                  {example.businessName}
+                </button>
+              ))}
             </div>
-            <div className="py-2 pb-1">
-              <label className="block">
-                <span className="text-black">Startup idea in one sentence</span>
-                <div className="text-[9px] pb-1">
-                  What would the "h1" tag on your main landing page say?
-                </div>
-                <input
-                  className="form-input block w-full rounded-md bg-white-200 text-black text-sm p-2 h-5"
-                  type="text"
-                />
-              </label>
+            <div className="px-4 mt-6">
+              <div className="bg-gray-300 h-0.5"></div>
+            </div>
+            <div className="rounded-lg mt-4">
+              <div className="py-2 pb-1">
+                <label className="block">
+                  <span className="text-black">Name of startup</span>
+                  <div className="text-[9px] pb-1">
+                    Helpful for capturing the business in one word
+                  </div>
+                  <input
+                    className="form-input block w-full rounded-md bg-white-200 text-black text-sm p-2 h-5"
+                    type="text"
+                    value={businessLabels[0]}
+                  />
+                </label>
+              </div>
+              <div className="py-2 pb-1">
+                <label className="block">
+                  <span className="text-black">
+                    Startup idea in one sentence
+                  </span>
+                  <div className="text-[9px] pb-1">
+                    What would the "h1" tag on your main landing page say?
+                  </div>
+                  <input
+                    className="form-input block w-full rounded-md bg-white-200 text-black text-sm p-2 h-5"
+                    type="text"
+                    value={businessLabels[1]}
+                  />
+                </label>
+              </div>
             </div>
             {optionsArray.map((optionData, index) => (
               <InputWithDropdown
