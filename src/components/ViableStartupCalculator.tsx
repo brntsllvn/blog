@@ -524,7 +524,7 @@ const ViableStartupCalculator: React.FC = () => {
             </a>{" "}
             for additional context
           </div>
-          <div className="flex justify-between items-center mt-2 px-4">
+          <div className="flex justify-between items-center mt-2">
             <div className="text-black font-semibold text-sm">
               Score: {totalResult}
             </div>
@@ -539,11 +539,11 @@ const ViableStartupCalculator: React.FC = () => {
             </button>
           </div>
           <div>
-            <div className="flex items-center mt-4 px-4 text-[8px] text-black gap-3">
-              <div>Examples</div>
+            <div className="text-xs mt-4">Examples</div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 items-center mt-4 text-[8px] text-black gap-3">
               {exampleArray.map((example) => (
                 <button
-                  className="border border-gray-300 py-1 px-2 rounded-lg"
+                  className="border border-gray-300 py-1 rounded-lg"
                   onClick={() =>
                     handleFillExampleData(
                       example.businessName,
@@ -557,7 +557,7 @@ const ViableStartupCalculator: React.FC = () => {
               ))}
             </div>
             <div className="px-4 mt-6">
-              <div className="bg-gray-300 h-0.5"></div>
+              <div className="bg-gray-300 style={{ height: '0.25rem' }}"></div>
             </div>
             <div className="rounded-lg mt-4">
               <div className="py-2 pb-1">
