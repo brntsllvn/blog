@@ -3,7 +3,7 @@ import Nav from "./Nav";
 
 function Home() {
   return (
-    <div>
+    <div className="pb-36">
       <Nav />
       <div className="bg-white pt-12">
         <div className="max-w-7xl px-6 lg:px-8">
@@ -44,7 +44,7 @@ function Home() {
                       Calculator: Is My Startup Viable?
                     </Link>
                   </h3>
-                  <ul className="mt-5 text-sm leading-6 text-gray-600 list-disc text-left">
+                  <ul className="mt-5 text-sm leading-6 text-gray-600 list-disc text-left pl-4">
                     <li>
                       Yesterday, my co-founder and I decided to walk away from
                       our revenue-generating startup.

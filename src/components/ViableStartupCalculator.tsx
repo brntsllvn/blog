@@ -480,7 +480,7 @@ const ViableStartupCalculator: React.FC = () => {
   ];
 
   return (
-    <div>
+    <div className="pb-64">
       <Nav />
       <div className="min-h-min flex items-center justify-center px-2 mt-8">
         <div
@@ -539,27 +539,26 @@ const ViableStartupCalculator: React.FC = () => {
             </button>
           </div>
           <div>
-            <div className="text-xs mt-4">Examples</div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 items-center mt-4 text-[8px] text-black gap-3">
-              {exampleArray.map((example) => (
-                <button
-                  className="border border-gray-300 py-1 rounded-lg"
-                  onClick={() =>
-                    handleFillExampleData(
-                      example.businessName,
-                      example.businessH1,
-                      example.data
-                    )
-                  }
-                >
-                  {example.businessName}
-                </button>
-              ))}
+            <div className="border-b border-gray-400">
+              <div className="text-xs mt-4">Examples</div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 items-center mt-4 mb-6 text-[8px] text-black gap-3 ">
+                {exampleArray.map((example) => (
+                  <button
+                    className="border border-gray-300 py-1 rounded-lg"
+                    onClick={() =>
+                      handleFillExampleData(
+                        example.businessName,
+                        example.businessH1,
+                        example.data
+                      )
+                    }
+                  >
+                    {example.businessName}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="px-4 mt-6">
-              <div className="bg-gray-300 style={{ height: '0.25rem' }}"></div>
-            </div>
-            <div className="rounded-lg mt-4">
+            <div className="rounded-lg mt-4 mt-10">
               <div className="py-2 pb-1">
                 <label className="block">
                   <span className="text-black">Name of startup</span>
