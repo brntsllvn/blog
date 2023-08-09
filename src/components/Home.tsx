@@ -12,8 +12,27 @@ function Home() {
               Brent Sullivan's Blog
             </h2>
             <p className="mt-2 text-lg leading-8 text-gray-600">
-              I'm a founder with several startup flops and one basehit. I learn
-              something on every iteration.
+              I'm a startup founder interested in business ideation, customer
+              development and scaling. I founded{" "}
+              <a
+                className="underline"
+                href="https://www.deconstructconf.com"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Deconstruct Conf
+              </a>{" "}
+              and have been concentrating on VC-backable scale-ups since 2021
+              (mostly fintech and SaaS). Say hello on{" "}
+              <a
+                className="underline"
+                href="https://www.linkedin.com/in/brent-sullivan-350230209/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+              .
             </p>
             <div className="mt-10 space-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16">
               <article className="max-w-xl flex-col items-start">
@@ -25,32 +44,56 @@ function Home() {
                       Calculator: Is My Startup Viable?
                     </Link>
                   </h3>
-                  <ul className="mt-5 text-sm leading-6 text-gray-600 custom-bullets text-left">
-                    <li>
-                      {" "}
-                      A calculator based on{" "}
-                      <a
-                        className="underline"
-                        href="https://longform.asmartbear.com/jason-cohen/"
-                      >
-                        Jason Cohen's
-                      </a>{" "}
-                      must-read blog post{" "}
-                      <a
-                        className="underline"
-                        href="https://longform.asmartbear.com/problem/"
-                      >
-                        Excuse me, is there a problem?
-                      </a>
-                    </li>
+                  <ul className="mt-5 text-sm leading-6 text-gray-600 list-disc  text-left">
                     <li>
                       Yesterday, my co-founder and I decided to walk away from
                       our revenue-generating startup.
                     </li>
                     <li>
                       After analyzing our target audience, business model, and
-                      product using this calculator, it was obvious we were
-                      headed in the wrong direction.
+                      product, it was painfully, and embarassingly, obvious we
+                      were headed in the wrong direction.
+                    </li>
+                    <li>
+                      Our "ah-ha" moment came from Jason Cohen's{" "}
+                      <a
+                        className="underline"
+                        href="https://longform.asmartbear.com/problem/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Excuse me, is there a problem?
+                      </a>
+                    </li>
+                    <li>
+                      The calculator in Jason's blog provides an{" "}
+                      <a
+                        className="underline"
+                        href="https://longform.asmartbear.com/roi-rubric/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        order-of-magnitude estimation
+                      </a>{" "}
+                      of the viability of a startup.
+                    </li>
+                    <li>
+                      I found the calculator <i>very</i> accurately reflected
+                      investor questions, anecdotes, and concerns.
+                    </li>
+                    <li>
+                      Use the calculator on day 1, before talking to customers,
+                      building anything, or pitching investors.
+                    </li>
+                    <li>
+                      Try the{" "}
+                      <a
+                        className="underline"
+                        href="/is-my-startup-viable-calculator"
+                      >
+                        calculator
+                      </a>
+                      .
                     </li>
                   </ul>
                 </div>
