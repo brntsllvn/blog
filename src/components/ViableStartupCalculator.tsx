@@ -7,12 +7,17 @@ interface Option {
   label: string;
 }
 
+interface Resource {
+  label: string;
+  url: string;
+}
+
 interface InputProps {
   label: string;
-  subscript: string;
+  task: string;
+  question: string;
   guidance: string;
-  readMoreURL: string;
-  readMoreLabel: string;
+  resources: Resource[];
   options: Option[];
   onResultChange: (result: number) => void;
   onOptionChange: (option: string) => void;
@@ -21,10 +26,10 @@ interface InputProps {
 
 const InputWithDropdown: React.FC<InputProps> = ({
   label,
-  subscript,
+  task,
+  question,
   guidance,
-  readMoreURL,
-  readMoreLabel,
+  resources,
   options,
   onResultChange,
   onOptionChange,
@@ -45,13 +50,21 @@ const InputWithDropdown: React.FC<InputProps> = ({
   return (
     <div className="py-2 pb-1">
       <div>{label}</div>
-      <div className="text-[9px]">{`Estimate: ${subscript}`}</div>
-      <div className="text-[9px] font-bold">{`Jason's guidance: ${guidance}`}</div>
-      <div className="text-[9px]">
-        Read more:{" "}
-        <a className="underline" href={readMoreURL}>
-          {readMoreLabel}
-        </a>
+      <div className="text-[8px]">{`Estimate: ${task}`}</div>
+      <div className="text-[8px]">{`Question: ${question}`}</div>
+      <div className="text-[8px] font-bold">{`Guidance: ${guidance}`}</div>
+      <div className="flex text-[8px] gap-1 pb-1">
+        <div>Sources:</div>
+        {resources.map((r) => (
+          <a
+            target="_blank"
+            rel="noreferrer"
+            className="border border-gray-300 px-2 rounded-lg"
+            href={r.url}
+          >
+            {r.label}
+          </a>
+        ))}
       </div>
       <div>
         <select
@@ -157,7 +170,7 @@ const ViableStartupCalculator: React.FC = () => {
       new Date().toISOString().replace("T", " ").split(".")[0] + " UTC";
     doc.text(`Calculated ${timestamp}`, xPos, yPos);
 
-    doc.save("Startup_Details.pdf");
+    doc.save("is-my-startup-viable.pdf");
   };
 
   const handleInputOptionChange = (index: number, option: string) => {
@@ -227,10 +240,19 @@ const ViableStartupCalculator: React.FC = () => {
   const optionsArray = [
     {
       label: "Audience Size",
-      subscript: "Number of potential customers (consumers or businesses)",
-      guidance: "10M+ people or 100k+ orgs have the problem?",
-      readMoreURL: "https://longform.asmartbear.com/roi-rubric/",
-      readMoreLabel: "Fermi Estimation",
+      task: "Number of potential customers (consumers or businesses)",
+      question: "Do 10M+ people or 100k+ orgs have the problem?",
+      guidance: "Go B2B. Businesses pay for solutions. Consumers hate spending",
+      resources: [
+        {
+          label: "Jason's talk",
+          url: "https://www.youtube.com/watch?v=otbnC2zE2rw&t=24m28s",
+        },
+        {
+          label: "Starter Story",
+          url: "https://www.linkedin.com/posts/patrickwalls_how-to-make-2x-more-money-with-one-simple-activity-7085650547940175875-nw3z",
+        },
+      ],
       options: [
         { value: 1000000000, label: "1,000,000,000" },
         { value: 100000000, label: "100,000,000" },
@@ -243,11 +265,24 @@ const ViableStartupCalculator: React.FC = () => {
     },
     {
       label: "Self-Aware Market",
-      subscript: "Does the audience know and care they have the problem?",
-      guidance:
-        "Confirm the problem is real, prospects agree and solving it is a priority",
-      readMoreURL: "https://longform.asmartbear.com/customer-development/",
-      readMoreLabel: "Customer Development",
+      task: "How urgent/important it is for your audience to solve the problem",
+      question:
+        "Does the audience know they have a problem and care to solve it now?",
+      guidance: "The goal is to uncover the truth, not to sell",
+      resources: [
+        {
+          label: "Jason on customer development",
+          url: "https://longform.asmartbear.com/customer-development/",
+        },
+        {
+          label: "The Mom Test",
+          url: "https://www.momtestbook.com/",
+        },
+        {
+          label: "The Startup Owner's Manual",
+          url: "https://steveblank.com/startup-owners-manual-1in/",
+        },
+      ],
       options: [
         { value: 0.01, label: "0.01: Few agree or care" },
         {
@@ -263,12 +298,19 @@ const ViableStartupCalculator: React.FC = () => {
     },
     {
       label: "Lucrative Market",
-      subscript: "Annual allocated budget",
-      guidance:
-        "Confirm the audience has enough money available and budgeted to solve the problem",
-      readMoreURL:
-        "https://longform.asmartbear.com/pricing-determines-your-business-model/",
-      readMoreLabel: "Pricing Determines Your Business Model",
+      task: "Customers' annual budget for the problem",
+      question: "If there's budget at all, is the budget large enough?",
+      guidance: "Many great ideas solve real problems with no budget and fail",
+      resources: [
+        {
+          label: "The Mom Test",
+          url: "https://www.momtestbook.com/",
+        },
+        {
+          label: "The Startup Owner's Manual",
+          url: "https://steveblank.com/startup-owners-manual-1in/",
+        },
+      ],
       options: [
         { value: 1000000, label: "$1,000,000" },
         { value: 100000, label: "$100,000" },
@@ -281,28 +323,33 @@ const ViableStartupCalculator: React.FC = () => {
     },
     {
       label: "Liquid Market",
-      subscript:
-        "How often do your customers make a purchase decsion and how hard is it to switch?",
+      task: "How frequently customers buy and how hard it is to switch",
+      question: "Does a prospect have the organizational will to buy from you?",
       guidance:
-        "Find all the frictions that prevent purchase (e.g. long-term contract, difficult in moving data, cross-system integrations, etc.)",
-      readMoreURL: "TBD",
-      readMoreLabel: "TBD",
+        "Long-term contracts, data migration, and integrations are barriers",
+      resources: [],
       options: [
         { value: 0.01, label: "0.01: Every few years, hard to switch" },
         { value: 0.1, label: "0.1: Once a year, moderate challenge to switch" },
-        {
-          value: 1.0,
-          label: "1.0: Always in the market, easy to switch",
-        },
+        { value: 1.0, label: "1.0: Always in the market, easy to switch" },
       ],
     },
     {
       label: "Eager To Buy From You Specifically?",
-      subscript: "Attitude towards your company",
-      guidance:
-        "Do prospects trust you, your product, track record, security standards, customer service, ability to scale, etc.",
-      readMoreURL: "TBD",
-      readMoreLabel: "TBD",
+      task: "Prospects' willingness to trust you",
+      question:
+        "Do they trust your product, record, security, support, future?",
+      guidance: "Combine joy, skill, and need for 'Love' products",
+      resources: [
+        {
+          label: "Jason on willingness to pay",
+          url: "https://longform.asmartbear.com/willingness-to-pay/",
+        },
+        {
+          label: "Jason on fulfillment",
+          url: "https://longform.asmartbear.com/fulfillment/",
+        },
+      ],
       options: [
         { value: 0, label: "0: They cannot buy from you" },
         { value: 0.1, label: "0.1: Serious trust challenges" },
@@ -312,11 +359,25 @@ const ViableStartupCalculator: React.FC = () => {
     },
     {
       label: "Eager To Buy From You Versus Competition?",
-      subscript: "Competitive differentiation",
+      task: "Your competitive differentiation",
+      question:
+        "Is your product sufficiently different? Does enough of the market care?",
       guidance:
-        "Do you have something unique and does a big chunk of the market care about that thing?",
-      readMoreURL: "https://longform.asmartbear.com/willingness-to-pay/",
-      readMoreLabel: "Willingness to Pay",
+        "Even better than different is to be extreme in that difference",
+      resources: [
+        {
+          label: "Worse, but unique",
+          url: "https://longform.asmartbear.com/worse-but-unique/",
+        },
+        {
+          label: "Purple Cow",
+          url: "https://en.wikipedia.org/wiki/Purple_Cow:_Transform_Your_Business_by_Being_Remarkable",
+        },
+        {
+          label: "So Good They Can't Ignore You",
+          url: "https://www.youtube.com/watch?v=qwOdU02SE0w",
+        },
+      ],
       options: [
         { value: 0.1, label: "0.1: No material differentiation" },
         { value: 0.5, label: "0.5: Some best-in-class features" },
@@ -325,12 +386,20 @@ const ViableStartupCalculator: React.FC = () => {
     },
     {
       label: "Enduring",
-      subscript: "Will they still be a customer a year from now?",
+      task: "Will they still be a customer a year from now? Is the pain temporary?",
+      question: "What drives attrition? Is the pain temporary?",
       guidance:
-        "5%/mo cancellation means only half the customers will still be customers a year from now. One-time revenue businesses still need repeat revenue",
-      readMoreURL:
-        "https://cloud.substack.com/p/my-top-10-mistakes-in-10-years-gainsight#%C2%A7mistake-not-starting-act-ii-fast-enough",
-      readMoreLabel: "Impossible to become a scale-up unicorn with high churn",
+        "5%/mo cancellation leads to 50% annual loss. Even one-offs need repeat revenue",
+      resources: [
+        {
+          label: "Naturally recurring revenue",
+          url: "https://www.youtube.com/watch?v=otbnC2zE2rw&t=28m57s",
+        },
+        {
+          label: "Impossible to become a unicorn with high churn",
+          url: "https://cloud.substack.com/p/my-top-10-mistakes-in-10-years-gainsight#%C2%A7mistake-not-starting-act-ii-fast-enough",
+        },
+      ],
       options: [
         { value: 0.01, label: "0.01: One-off purchase without loyalty" },
         { value: 0.1, label: "0.1: One-off purchase with evangelism" },
@@ -364,7 +433,7 @@ const ViableStartupCalculator: React.FC = () => {
         { result: 0.01, option: "0.01: Every few years" },
         { result: 0.5, option: "0.5: Indifferent or low-trust product" },
         { result: 0.5, option: "0.5: Some best-in-class features" },
-        { result: 0.5, option: "0.5 : Recurring-revenue + recurring-problem" },
+        { result: 0.5, option: "0.5: Recurring revenue or problem" },
       ],
     },
     {
@@ -377,7 +446,39 @@ const ViableStartupCalculator: React.FC = () => {
         { result: 0.01, option: "0.01: Every few years" },
         { result: 0.5, option: "0.5: Indifferent or low-trust product" },
         { result: 0.1, option: "0.1: No material differentiation" },
-        { result: 0.5, option: "0.5 : Recurring-revenue + recurring-problem" },
+        { result: 0.5, option: "0.5: Recurring revenue or problem" },
+      ],
+    },
+    {
+      businessName: "Airbnb",
+      businessH1: "Every dwelling becomes a hotel",
+      data: [
+        { result: 1000000000, option: "1,000,000,000" },
+        { result: 1.0, option: "1.0: Hard to find someone who doesn't care" },
+        { result: 100, option: "$100" },
+        {
+          result: 1.0,
+          option: "1.0: Always in the market, easy to switch",
+        },
+        { result: 0.1, option: "0.1: Serious trust challenges" },
+        { result: 0.5, option: "0.5: Some best-in-class features" },
+        { result: 0.5, option: "0.5: Recurring revenue or problem" },
+      ],
+    },
+    {
+      businessName: "Zillow",
+      businessH1: "High-quality leads for real-estate agents",
+      data: [
+        { result: 1000000, option: "1,000,000" },
+        { result: 0.5, option: "0.5: Industry standard-practice" },
+        { result: 10000, option: "$10,000" },
+        {
+          result: 1.0,
+          option: "1.0: Always in the market, easy to switch",
+        },
+        { result: 0.5, option: "0.5: Indifferent or low-trust product" },
+        { result: 0.5, option: "0.5: Some best-in-class features" },
+        { result: 0.5, option: "0.5: Recurring revenue or problem" },
       ],
     },
   ];
@@ -403,7 +504,7 @@ const ViableStartupCalculator: React.FC = () => {
               Excuse me, is there a problem?
             </a>
           </div>
-          <div className="text-[8px] text-center mb-4">
+          <div className="text-[8px] text-center mb-1">
             See{" "}
             <a
               className="underline"
@@ -414,6 +515,18 @@ const ViableStartupCalculator: React.FC = () => {
               Fermi Estimation
             </a>{" "}
             for why this calculator is useful
+          </div>
+          <div className="text-[8px] text-center mb-4">
+            See{" "}
+            <a
+              className="underline"
+              href="https://youtu.be/otbnC2zE2rw"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Jason's conference talk
+            </a>{" "}
+            for additional context
           </div>
           <div className="flex justify-between items-center mt-2 px-4">
             <div className="text-black font-semibold text-sm">
@@ -484,10 +597,10 @@ const ViableStartupCalculator: React.FC = () => {
               <InputWithDropdown
                 key={index}
                 label={optionData.label}
-                subscript={optionData.subscript}
+                task={optionData.task}
+                question={optionData.question}
                 guidance={optionData.guidance}
-                readMoreURL={optionData.readMoreURL}
-                readMoreLabel={optionData.readMoreLabel}
+                resources={optionData.resources}
                 options={optionData.options}
                 onResultChange={(result) =>
                   handleInputResultChange(index, result)

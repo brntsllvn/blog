@@ -44,7 +44,7 @@ function Home() {
                       Calculator: Is My Startup Viable?
                     </Link>
                   </h3>
-                  <ul className="mt-5 text-sm leading-6 text-gray-600 list-disc  text-left">
+                  <ul className="mt-5 text-sm leading-6 text-gray-600 list-disc text-left">
                     <li>
                       Yesterday, my co-founder and I decided to walk away from
                       our revenue-generating startup.
