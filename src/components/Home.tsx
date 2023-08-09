@@ -78,12 +78,14 @@ function Home() {
                       of the viability of a startup.
                     </li>
                     <li>
-                      I found the calculator <i>very</i> accurately reflected
-                      investor questions, anecdotes, and concerns.
+                      The calculator is the best proxy for investor feedback
+                      I've seen. It's valuable for assessing
+                      lifestyle/self-funded ideas too.
                     </li>
                     <li>
-                      Use the calculator on day 1, before talking to customers,
-                      building anything, or pitching investors.
+                      I wish we had the calculator before talking to customers,
+                      building and pitching. It would have saved us a lot of
+                      time.
                     </li>
                     <li>
                       Try the{" "}
