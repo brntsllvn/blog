@@ -21,7 +21,7 @@ function Home() {
                 <div className="group relative">
                   <time className="text-gray-500">Aug 4, 2023</time>
                   <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                    <Link to="/calculator-is-my-startup-viable">
+                    <Link to="/is-my-startup-viable-calculator">
                       Calculator: Is My Startup Viable?
                     </Link>
                   </h3>

@@ -107,7 +107,11 @@ const ViableStartupCalculator: React.FC = () => {
       yPos
     );
     yPos += yGap - 1;
-    doc.text("Calculator (www.adthatch.com/is-my-startup-viable)", xPos, yPos);
+    doc.text(
+      "Calculator (www.adthatch.com/is-my-startup-viable-calculator)",
+      xPos,
+      yPos
+    );
     yPos += yGap - 1;
     doc.text(
       "Say hello (https://www.linkedin.com/in/brent-sullivan-350230209/)",
