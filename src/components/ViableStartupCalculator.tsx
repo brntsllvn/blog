@@ -540,7 +540,7 @@ const ViableStartupCalculator: React.FC = () => {
           </div>
           <div>
             <div className="border-b border-gray-400">
-              <div className="text-xs mt-4">Examples</div>
+              <div className="text-[8px] mt-4">Examples</div>
               <div className="grid grid-cols-1 sm:grid-cols-3 items-center mt-4 mb-6 text-[8px] text-black gap-3 ">
                 {exampleArray.map((example) => (
                   <button
@@ -562,7 +562,7 @@ const ViableStartupCalculator: React.FC = () => {
               <div className="py-2 pb-1">
                 <label className="block">
                   <span className="text-black">Name of startup</span>
-                  <div className="text-[9px] pb-1">
+                  <div className="text-[8px] pb-1">
                     Helpful for capturing the business in one(ish) word
                   </div>
                   <input
@@ -577,7 +577,7 @@ const ViableStartupCalculator: React.FC = () => {
                   <span className="text-black">
                     Startup idea in one sentence
                   </span>
-                  <div className="text-[9px] pb-1">
+                  <div className="text-[8px] pb-1">
                     What would the "h1" tag on your main landing page say?
                   </div>
                   <input
