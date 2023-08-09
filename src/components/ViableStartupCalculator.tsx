@@ -126,11 +126,7 @@ const ViableStartupCalculator: React.FC = () => {
       yPos
     );
     yPos += yGap - 1;
-    doc.text(
-      "Say hello (https://www.linkedin.com/in/brent-sullivan-350230209/)",
-      xPos,
-      yPos
-    );
+    doc.text("Say hello (https://www.linkedin.com/in/brntsllvn)", xPos, yPos);
     yPos += yGap + 5;
 
     doc.setFontSize(titleSize);

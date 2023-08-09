@@ -26,7 +26,7 @@ function Home() {
               (mostly fintech and SaaS). Say hello on{" "}
               <a
                 className="underline"
-                href="https://www.linkedin.com/in/brent-sullivan-350230209/"
+                href="https://www.linkedin.com/in/brntsllvn"
                 target="_blank"
                 rel="noreferrer"
               >
