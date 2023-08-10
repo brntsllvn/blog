@@ -49,7 +49,7 @@ const InputWithDropdown: React.FC<InputProps> = ({
 
   return (
     <div className="py-2 pb-1">
-      <div>{label}</div>
+      <div className="text-xl">{label}</div>
       <div className="text-[8px]">{`Estimate: ${task}`}</div>
       <div className="text-[8px]">{`Question: ${question}`}</div>
       <div className="text-[8px] font-bold">{`Guidance: ${guidance}`}</div>
@@ -349,7 +349,7 @@ const ViableStartupCalculator: React.FC = () => {
 
   const optionsArray = [
     {
-      label: "Audience Size",
+      label: "Audience",
       task: "Number of potential customers (consumers or businesses)",
       question: "Do 10M+ people or 100k+ orgs have the problem?",
       guidance: "Go B2B. Businesses pay for solutions. Consumers hate spending",
@@ -374,7 +374,7 @@ const ViableStartupCalculator: React.FC = () => {
       ],
     },
     {
-      label: "Self-Aware Market",
+      label: "Aware",
       task: "How urgent/important it is for your audience to solve the problem",
       question:
         "Does the audience know they have a problem and care to solve it now?",
@@ -401,7 +401,7 @@ const ViableStartupCalculator: React.FC = () => {
       ],
     },
     {
-      label: "Lucrative Market",
+      label: "Lucrative",
       task: "Customers' annual budget for the problem",
       question: "If there's budget at all, is the budget large enough?",
       guidance: "Many great ideas solve real problems with no budget and fail",
@@ -426,7 +426,7 @@ const ViableStartupCalculator: React.FC = () => {
       ],
     },
     {
-      label: "Liquid Market",
+      label: "Liquid",
       task: "How frequently customers buy and how hard it is to switch",
       question: "Does a prospect have the organizational will to buy from you?",
       guidance:
@@ -439,7 +439,7 @@ const ViableStartupCalculator: React.FC = () => {
       ],
     },
     {
-      label: "Eager To Buy From You Specifically?",
+      label: "Trust",
       task: "Prospects' willingness to trust you",
       question:
         "Do they trust your product, record, security, support, future?",
@@ -462,7 +462,7 @@ const ViableStartupCalculator: React.FC = () => {
       ],
     },
     {
-      label: "Eager To Buy From You Versus Competition?",
+      label: "Competition",
       task: "Your competitive differentiation",
       question:
         "Is your product sufficiently different? Does enough of the market care?",
@@ -735,143 +735,158 @@ const ViableStartupCalculator: React.FC = () => {
   return (
     <div className="pb-64">
       <Nav />
-      <div className="min-h-min flex items-center justify-center px-2 mt-8">
-        <div
-          className={`w-full max-w-md mx-auto px-4 py-8 ${bgColorClass} rounded-lg shadow-md`}
-        >
-          <h1 className="text-black text-3xl font-bold text-center mb-2">
-            Is My Startup Viable?
-          </h1>
-          <div className="text-[8px] text-center mb-1">
-            Based on Jason Cohen's{" "}
-            <a
-              className="underline"
-              href="https://longform.asmartbear.com/problem/"
-              target="_blank"
-              rel="noreferrer"
+      <div>
+        <div id="calculator">
+          <div className="min-h-min flex items-center justify-center px-2 mt-8">
+            <div
+              className={`w-full max-w-md mx-auto px-4 py-8 ${bgColorClass} rounded-lg shadow-md`}
             >
-              Excuse me, is there a problem?
-            </a>
-          </div>
-          <div className="text-[8px] text-center mb-1">
-            See{" "}
-            <a
-              className="underline"
-              href="https://longform.asmartbear.com/roi-rubric/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Fermi Estimation
-            </a>{" "}
-            for why this calculator is useful
-          </div>
-          <div className="text-[8px] text-center mb-4">
-            See{" "}
-            <a
-              className="underline"
-              href="https://youtu.be/otbnC2zE2rw"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Jason's conference talk
-            </a>{" "}
-            for additional context
-          </div>
-          <div className="flex justify-between items-center mt-2">
-            <div className="text-black font-semibold">Score: {totalResult}</div>
-            <div className="text-black font-semibold">
-              Result: {calculateResult(totalResult)}
-            </div>
-            <button
-              onClick={downloadPDF}
-              className="text-black font-semibold border border-gray-300 py-1 px-2 rounded-lg"
-            >
-              Save as PDF
-            </button>
-          </div>
-          <div>
-            <div className="border-b border-gray-400">
-              <div className="text-[8px] mt-4">Examples</div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 items-center mt-2 mb-6 text-[10px] text-black gap-1">
-                {exampleArray.map((example) => (
-                  <button
-                    className={`border border-gray-300 py-2 rounded-lg ${example.color}`}
-                    onClick={() =>
-                      handleFillExampleData(
-                        example.businessName,
-                        example.businessH1,
-                        example.data
-                      )
-                    }
-                  >
-                    <div>{example.businessName}</div>
-                    <div className="text-[6px]">
-                      2022 Revenue: {example.revenue}
+              <h1 className="text-black text-3xl font-bold text-center mb-2">
+                Is My Startup Viable?
+              </h1>
+              <div className="text-[8px] text-center mb-1">
+                Based on Jason Cohen's{" "}
+                <a
+                  className="underline"
+                  href="https://longform.asmartbear.com/problem/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Excuse me, is there a problem?
+                </a>
+              </div>
+              <div className="text-[8px] text-center mb-1">
+                See{" "}
+                <a
+                  className="underline"
+                  href="https://longform.asmartbear.com/roi-rubric/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Fermi Estimation
+                </a>{" "}
+                for why this calculator is useful
+              </div>
+              <div className="text-[8px] text-center mb-4">
+                See{" "}
+                <a
+                  className="underline"
+                  href="https://youtu.be/otbnC2zE2rw"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Jason's conference talk
+                </a>{" "}
+                for additional context
+              </div>
+              <div className="flex justify-between items-center mt-2">
+                <div className="text-black font-semibold">
+                  Score: {totalResult}
+                </div>
+                <div className="text-black font-semibold">
+                  Result: {calculateResult(totalResult)}
+                </div>
+                <button
+                  onClick={downloadPDF}
+                  className="text-black font-semibold border border-gray-300 py-1 px-2 rounded-lg"
+                >
+                  Save as PDF
+                </button>
+              </div>
+              <div>
+                <div className="border-b border-gray-400">
+                  <div className="text-[8px] mt-4">Examples</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 items-center mt-2 mb-6 text-[10px] text-black gap-1">
+                    {exampleArray.map((example) => (
+                      <button
+                        className={`border border-gray-300 py-2 rounded-lg ${example.color}`}
+                        onClick={() =>
+                          handleFillExampleData(
+                            example.businessName,
+                            example.businessH1,
+                            example.data
+                          )
+                        }
+                      >
+                        <div>{example.businessName}</div>
+                        <div className="text-[6px]">
+                          2022 Revenue: {example.revenue}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-lg mt-4 mt-10">
+                  <div className="py-2 pb-1">
+                    <label className="block">
+                      <span className="text-black text-xl">
+                        Name of startup
+                      </span>
+                      <div className="text-[8px] pb-1">
+                        Helpful for capturing the business in one(ish) word
+                      </div>
+                      <input
+                        className="form-input block w-full rounded-md bg-white-200 text-black text-sm p-2 h-5"
+                        type="text"
+                        value={businessLabels[0]}
+                      />
+                    </label>
+                  </div>
+                  <div className="py-2 pb-1">
+                    <label className="block">
+                      <span className="text-black text-xl">
+                        Startup idea in one sentence
+                      </span>
+                      <div className="text-[8px] pb-1">
+                        What would the "h1" tag on your main landing page say?
+                      </div>
+                      <input
+                        className="form-input block w-full rounded-md bg-white-200 text-black text-sm p-2 h-5"
+                        type="text"
+                        value={businessLabels[1]}
+                      />
+                    </label>
+                  </div>
+                </div>
+                {optionsArray.map((optionData, index) => (
+                  <div>
+                    <InputWithDropdown
+                      key={index}
+                      label={optionData.label}
+                      task={optionData.task}
+                      question={optionData.question}
+                      guidance={optionData.guidance}
+                      resources={optionData.resources}
+                      options={optionData.options}
+                      selectedOption={selectedOptions[index]}
+                      onResultChange={(result) =>
+                        handleInputResultChange(index, result)
+                      }
+                      onOptionChange={(option) =>
+                        handleInputOptionChange(index, option)
+                      }
+                    />
+                    <div className="pb-1 flex gap-1">
+                      <span className="text-black text-[8px]">Why?</span>
+                      <input
+                        className="form-input block w-full rounded-md bg-white-200 text-black text-[8px] h-3 pl-2"
+                        type="text"
+                        value={reasons[index]}
+                        onChange={(e) =>
+                          handleReasonChange(index, e.target.value)
+                        }
+                        placeholder="Record your rationale..."
+                      />
                     </div>
-                  </button>
+                  </div>
                 ))}
               </div>
             </div>
-            <div className="rounded-lg mt-4 mt-10">
-              <div className="py-2 pb-1">
-                <label className="block">
-                  <span className="text-black">Name of startup</span>
-                  <div className="text-[8px] pb-1">
-                    Helpful for capturing the business in one(ish) word
-                  </div>
-                  <input
-                    className="form-input block w-full rounded-md bg-white-200 text-black text-sm p-2 h-5"
-                    type="text"
-                    value={businessLabels[0]}
-                  />
-                </label>
-              </div>
-              <div className="py-2 pb-1">
-                <label className="block">
-                  <span className="text-black">
-                    Startup idea in one sentence
-                  </span>
-                  <div className="text-[8px] pb-1">
-                    What would the "h1" tag on your main landing page say?
-                  </div>
-                  <input
-                    className="form-input block w-full rounded-md bg-white-200 text-black text-sm p-2 h-5"
-                    type="text"
-                    value={businessLabels[1]}
-                  />
-                </label>
-              </div>
-            </div>
-            {optionsArray.map((optionData, index) => (
-              <div>
-                <InputWithDropdown
-                  key={index}
-                  label={optionData.label}
-                  task={optionData.task}
-                  question={optionData.question}
-                  guidance={optionData.guidance}
-                  resources={optionData.resources}
-                  options={optionData.options}
-                  selectedOption={selectedOptions[index]}
-                  onResultChange={(result) =>
-                    handleInputResultChange(index, result)
-                  }
-                  onOptionChange={(option) =>
-                    handleInputOptionChange(index, option)
-                  }
-                />
-                <div className="pb-1 flex gap-1">
-                  <span className="text-black text-[8px]">Why?</span>
-                  <input
-                    className="form-input block w-full rounded-md bg-white-200 text-black text-[8px] h-3 pl-2"
-                    type="text"
-                    value={reasons[index]}
-                    onChange={(e) => handleReasonChange(index, e.target.value)}
-                    placeholder="Record your rationale..."
-                  />
-                </div>
-              </div>
-            ))}
+          </div>
+        </div>
+        <div id="notes">
+          <div className="min-h-min flex items-center justify-center px-2 mt-8">
+            <h1>hello</h1>
           </div>
         </div>
       </div>
