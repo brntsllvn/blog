@@ -76,7 +76,7 @@ const InputWithDropdown: React.FC<InputProps> = ({
             Select an option
           </option>
           {options.map((option) => (
-            <option className="text-sm" key={option.value} value={option.label}>
+            <option key={option.value} value={option.label}>
               {option.label}
             </option>
           ))}
@@ -236,22 +236,116 @@ const ViableStartupCalculator: React.FC = () => {
   };
 
   const calculateResultColor = (totalResult: number) => {
-    if (totalResult >= 4) {
+    if (totalResult >= 10) {
       return "bg-green-400";
+    } else if (totalResult >= 4) {
+      return "bg-green-300";
     } else if (totalResult >= 2) {
       return "bg-green-200";
     } else if (totalResult >= 1) {
-      return "bg-red-400";
+      return "bg-red-300";
     } else if (totalResult >= 0.1) {
-      return "bg-red-500";
+      return "bg-red-400";
     } else if (totalResult === 0) {
-      return "bg-stone-200";
+      return "bg-stone-100";
     } else {
-      return "bg-red-600";
+      return "bg-red-500";
     }
   };
 
   let bgColorClass = calculateResultColor(totalResult);
+
+  const allOptions = {
+    audienceBillion: {
+      value: 1000000000,
+      label: "1,000,000,000 businesses or people",
+    },
+    audienceHundredMillion: {
+      value: 100000000,
+      label: "100,000,000 businesses or people",
+    },
+    audienceTenMillion: {
+      value: 10000000,
+      label: "10,000,000 businesses or people",
+    },
+    audienceMillion: {
+      value: 1000000,
+      label: "1,000,000 businesses or people",
+    },
+    audienceHundredThousand: {
+      value: 100000,
+      label: "100,000 businesses or people",
+    },
+    audienceTenThousand: { value: 10000, label: "10,000 businesses or people" },
+    audienceThousand: { value: 1000, label: "1,000 businesses or people" },
+    awareFewAgree: {
+      value: 0.01,
+      label: "0.01: Few know or care they have the problem",
+    },
+    awareThoughtLeaders: {
+      value: 0.1,
+      label: "0.1: Thought-leaders care about solving the problem",
+    },
+    awareIndustryStandard: {
+      value: 0.5,
+      label: "0.5: Industry standard practice to solve the problem",
+    },
+    awareHardToFind: {
+      value: 1.0,
+      label: "1: Almost everyone must solve the problem",
+    },
+    lucrativeMillion: { value: 1000000, label: "$1,000,000 annual spend" },
+    lucrativeHundredThousand: { value: 100000, label: "$100,000 annual spend" },
+    lucrativeTenThousand: { value: 10000, label: "$10,000 annual spend" },
+    lucrativeThousand: { value: 1000, label: "$1,000 annual spend" },
+    lucrativeHundred: { value: 100, label: "$100 annual spend" },
+    lucrativeTen: { value: 10, label: "$10 annual spend" },
+    lucrativeOne: { value: 1, label: "$1 annual spend" },
+    liquidRare: {
+      value: 0.01,
+      label: "0.01: Switch every few years, hard to switch",
+    },
+    liquidAnnual: {
+      value: 0.1,
+      label: "0.1: Switch once a year, moderately challenging to switch",
+    },
+    liquidAlways: {
+      value: 1.0,
+      label: "1: Always in the market, easy to switch",
+    },
+    trustNo: { value: 0, label: "0: They cannot buy from you" },
+    trustChallenge: { value: 0.1, label: "0.1: Serious trust challenges" },
+    trustIndifferent: {
+      value: 0.5,
+      label: "0.5: Indifferent or low-trust product",
+    },
+    trustYou: { value: 1.0, label: "1: Emotional desire to select you" },
+    competitionDifficult: {
+      value: 0.1,
+      label: "0.1: No material differentiation",
+    },
+    competitionSomeFeatures: {
+      value: 0.5,
+      label: "0.5: Some best-in-class features",
+    },
+    competitionNoAlternative: {
+      value: 1.0,
+      label: "1: No viable alternative",
+    },
+    enduringOneOff: {
+      value: 0.01,
+      label: "0.01: One-off purchase without loyalty",
+    },
+    enduringOneEvangelism: {
+      value: 0.1,
+      label: "0.1: One-off purchase with evangelism",
+    },
+    enduringRecurring: {
+      value: 0.5,
+      label: "0.5: Recurring revenue or problem",
+    },
+    enduringLockIn: { value: 1.0, label: "1.0: Strong lock-in" },
+  };
 
   const optionsArray = [
     {
@@ -270,13 +364,13 @@ const ViableStartupCalculator: React.FC = () => {
         },
       ],
       options: [
-        { value: 1000000000, label: "1,000,000,000" },
-        { value: 100000000, label: "100,000,000" },
-        { value: 10000000, label: "10,000,000" },
-        { value: 1000000, label: "1,000,000" },
-        { value: 100000, label: "100,000" },
-        { value: 10000, label: "10,000" },
-        { value: 1000, label: "1,000" },
+        allOptions.audienceBillion,
+        allOptions.audienceHundredMillion,
+        allOptions.audienceTenMillion,
+        allOptions.audienceMillion,
+        allOptions.audienceHundredThousand,
+        allOptions.audienceTenThousand,
+        allOptions.audienceThousand,
       ],
     },
     {
@@ -300,16 +394,10 @@ const ViableStartupCalculator: React.FC = () => {
         },
       ],
       options: [
-        { value: 0.01, label: "0.01: Few agree or care" },
-        {
-          value: 0.1,
-          label: "0.1: Thought-leaders care/evangelize",
-        },
-        { value: 0.5, label: "0.5: Industry standard-practice" },
-        {
-          value: 1.0,
-          label: "1.0: Hard to find someone who doesn't care",
-        },
+        allOptions.awareFewAgree,
+        allOptions.awareThoughtLeaders,
+        allOptions.awareIndustryStandard,
+        allOptions.awareHardToFind,
       ],
     },
     {
@@ -328,13 +416,13 @@ const ViableStartupCalculator: React.FC = () => {
         },
       ],
       options: [
-        { value: 1000000, label: "$1,000,000 annual spend" },
-        { value: 100000, label: "$100,000 annual spend" },
-        { value: 10000, label: "$10,000 annual spend" },
-        { value: 1000, label: "$1,000 annual spend" },
-        { value: 100, label: "$100 annual spend" },
-        { value: 10, label: "$10 annual spend" },
-        { value: 1, label: "$1 annual spend" },
+        allOptions.lucrativeMillion,
+        allOptions.lucrativeHundredThousand,
+        allOptions.lucrativeTenThousand,
+        allOptions.lucrativeThousand,
+        allOptions.lucrativeHundred,
+        allOptions.lucrativeTen,
+        allOptions.lucrativeOne,
       ],
     },
     {
@@ -345,9 +433,9 @@ const ViableStartupCalculator: React.FC = () => {
         "Long-term contracts, data migration, and integrations are barriers",
       resources: [],
       options: [
-        { value: 0.01, label: "0.01: Every few years, hard to switch" },
-        { value: 0.1, label: "0.1: Once a year, moderate challenge to switch" },
-        { value: 1.0, label: "1.0: Always in the market, easy to switch" },
+        allOptions.liquidRare,
+        allOptions.liquidAnnual,
+        allOptions.liquidAlways,
       ],
     },
     {
@@ -367,10 +455,10 @@ const ViableStartupCalculator: React.FC = () => {
         },
       ],
       options: [
-        { value: 0, label: "0: They cannot buy from you" },
-        { value: 0.1, label: "0.1: Serious trust challenges" },
-        { value: 0.5, label: "0.5: Indifferent or low-trust product" },
-        { value: 1.0, label: "1.0: Emotional desire to select you" },
+        allOptions.trustNo,
+        allOptions.trustChallenge,
+        allOptions.trustIndifferent,
+        allOptions.trustYou,
       ],
     },
     {
@@ -395,9 +483,9 @@ const ViableStartupCalculator: React.FC = () => {
         },
       ],
       options: [
-        { value: 0.1, label: "0.1: No material differentiation" },
-        { value: 0.5, label: "0.5: Some best-in-class features" },
-        { value: 1.0, label: "1.0: No viable alternative" },
+        allOptions.competitionDifficult,
+        allOptions.competitionSomeFeatures,
+        allOptions.competitionNoAlternative,
       ],
     },
     {
@@ -417,10 +505,10 @@ const ViableStartupCalculator: React.FC = () => {
         },
       ],
       options: [
-        { value: 0.01, label: "0.01: One-off purchase without loyalty" },
-        { value: 0.1, label: "0.1: One-off purchase with evangelism" },
-        { value: 0.5, label: "0.5: Recurring revenue or problem" },
-        { value: 1.0, label: "1.0: Strong lock-in" },
+        allOptions.enduringOneOff,
+        allOptions.enduringOneEvangelism,
+        allOptions.enduringRecurring,
+        allOptions.enduringLockIn,
       ],
     },
   ];
@@ -429,72 +517,217 @@ const ViableStartupCalculator: React.FC = () => {
     {
       businessName: "WP Engine",
       businessH1: "Hosting for WordPress",
+      color: "bg-green-300",
+      revenue: "$240 MM",
       data: [
-        { result: 100000000, option: "100,000,000" },
-        { result: 0.1, option: "0.1: Thought-leaders care/evangelize" },
-        { result: 100, option: "$100" },
-        { result: 0.01, option: "0.01: Every few years" },
-        { result: 0.5, option: "0.5: Indifferent or low-trust product" },
-        { result: 0.5, option: "0.5: Some best-in-class features" },
-        { result: 1.0, option: "1.0 : Strong lock-in" },
+        {
+          result: allOptions.audienceHundredMillion.value,
+          option: allOptions.audienceHundredMillion.label,
+        },
+        {
+          result: allOptions.awareThoughtLeaders.value,
+          option: allOptions.awareThoughtLeaders.label,
+        },
+        {
+          result: allOptions.lucrativeHundred.value,
+          option: allOptions.lucrativeHundred.label,
+        },
+        {
+          result: allOptions.liquidRare.value,
+          option: allOptions.liquidRare.label,
+        },
+        {
+          result: allOptions.trustIndifferent.value,
+          option: allOptions.trustIndifferent.label,
+        },
+        {
+          result: allOptions.competitionSomeFeatures.value,
+          option: allOptions.competitionSomeFeatures.label,
+        },
+        {
+          result: allOptions.enduringLockIn.value,
+          option: allOptions.enduringLockIn.label,
+        },
       ],
     },
     {
       businessName: "ConvertKit",
       businessH1: "Marketing for creators",
+      color: "bg-green-200",
+      revenue: "$33.5 MM",
       data: [
-        { result: 10000000, option: "10,000,000" },
-        { result: 1.0, option: "1.0: Hard to find someone who doesn't care" },
-        { result: 100, option: "$100" },
-        { result: 0.01, option: "0.01: Every few years" },
-        { result: 0.5, option: "0.5: Indifferent or low-trust product" },
-        { result: 0.5, option: "0.5: Some best-in-class features" },
-        { result: 0.5, option: "0.5: Recurring revenue or problem" },
+        {
+          result: allOptions.audienceTenMillion.value,
+          option: allOptions.audienceTenMillion.label,
+        },
+        {
+          result: allOptions.awareHardToFind.value,
+          option: allOptions.awareHardToFind.label,
+        },
+        {
+          result: allOptions.lucrativeHundred.value,
+          option: allOptions.lucrativeHundred.label,
+        },
+        {
+          result: allOptions.liquidRare.value,
+          option: allOptions.liquidRare.label,
+        },
+        {
+          result: allOptions.trustIndifferent.value,
+          option: allOptions.trustIndifferent.label,
+        },
+        {
+          result: allOptions.competitionSomeFeatures.value,
+          option: allOptions.competitionSomeFeatures.label,
+        },
+        {
+          result: allOptions.enduringRecurring.value,
+          option: allOptions.enduringRecurring.label,
+        },
       ],
     },
     {
       businessName: "Consumer Security",
       businessH1: "Help people protect their data",
+      color: "bg-red-500",
+      revenue: "$0",
       data: [
-        { result: 1000000000, option: "1,000,000,000" },
-        { result: 0.01, option: "0.01: Few agree or care" },
-        { result: 10, option: "$10" },
-        { result: 0.01, option: "0.01: Every few years" },
-        { result: 0.5, option: "0.5: Indifferent or low-trust product" },
-        { result: 0.1, option: "0.1: No material differentiation" },
-        { result: 0.5, option: "0.5: Recurring revenue or problem" },
+        {
+          result: allOptions.audienceBillion.value,
+          option: allOptions.audienceBillion.label,
+        },
+        {
+          result: allOptions.awareFewAgree.value,
+          option: allOptions.awareFewAgree.label,
+        },
+        {
+          result: allOptions.lucrativeTen.value,
+          option: allOptions.lucrativeTen.label,
+        },
+        {
+          result: allOptions.liquidRare.value,
+          option: allOptions.liquidRare.label,
+        },
+        {
+          result: allOptions.trustIndifferent.value,
+          option: allOptions.trustIndifferent.label,
+        },
+        {
+          result: allOptions.competitionDifficult.value,
+          option: allOptions.competitionDifficult.label,
+        },
+        {
+          result: allOptions.enduringRecurring.value,
+          option: allOptions.enduringRecurring.label,
+        },
       ],
     },
     {
       businessName: "Airbnb",
       businessH1: "Every dwelling becomes a hotel",
+      color: "bg-green-400",
+      revenue: "$8.4 BN",
       data: [
-        { result: 1000000000, option: "1,000,000,000" },
-        { result: 1.0, option: "1.0: Hard to find someone who doesn't care" },
-        { result: 100, option: "$100" },
         {
-          result: 1.0,
-          option: "1.0: Always in the market, easy to switch",
+          result: allOptions.audienceBillion.value,
+          option: allOptions.audienceBillion.label,
         },
-        { result: 0.1, option: "0.1: Serious trust challenges" },
-        { result: 0.5, option: "0.5: Some best-in-class features" },
-        { result: 0.5, option: "0.5: Recurring revenue or problem" },
+        {
+          result: allOptions.awareHardToFind.value,
+          option: allOptions.awareHardToFind.label,
+        },
+        {
+          result: allOptions.lucrativeHundred.value,
+          option: allOptions.lucrativeHundred.label,
+        },
+        {
+          result: allOptions.liquidAlways.value,
+          option: allOptions.liquidAlways.label,
+        },
+        {
+          result: allOptions.trustChallenge.value,
+          option: allOptions.trustChallenge.label,
+        },
+        {
+          result: allOptions.competitionSomeFeatures.value,
+          option: allOptions.competitionSomeFeatures.label,
+        },
+        {
+          result: allOptions.enduringOneEvangelism.value,
+          option: allOptions.enduringOneEvangelism.label,
+        },
       ],
     },
     {
       businessName: "Zillow",
       businessH1: "High-quality leads for real-estate agents",
+      color: "bg-green-400",
+      revenue: "$1.9 BN",
       data: [
-        { result: 1000000, option: "1,000,000" },
-        { result: 0.5, option: "0.5: Industry standard-practice" },
-        { result: 10000, option: "$10,000" },
         {
-          result: 1.0,
-          option: "1.0: Always in the market, easy to switch",
+          result: allOptions.audienceMillion.value,
+          option: allOptions.audienceMillion.label,
         },
-        { result: 0.5, option: "0.5: Indifferent or low-trust product" },
-        { result: 0.5, option: "0.5: Some best-in-class features" },
-        { result: 0.5, option: "0.5: Recurring revenue or problem" },
+        {
+          result: allOptions.awareIndustryStandard.value,
+          option: allOptions.awareIndustryStandard.label,
+        },
+        {
+          result: allOptions.lucrativeThousand.value,
+          option: allOptions.lucrativeThousand.label,
+        },
+        {
+          result: allOptions.liquidAlways.value,
+          option: allOptions.liquidAlways.label,
+        },
+        {
+          result: allOptions.trustIndifferent.value,
+          option: allOptions.trustIndifferent.label,
+        },
+        {
+          result: allOptions.competitionSomeFeatures.value,
+          option: allOptions.competitionSomeFeatures.label,
+        },
+        {
+          result: allOptions.enduringRecurring.value,
+          option: allOptions.enduringRecurring.label,
+        },
+      ],
+    },
+    {
+      businessName: "Intuit",
+      businessH1: "Consumer tax preparation",
+      color: "bg-green-400",
+      revenue: "$12.7 BN",
+      data: [
+        {
+          result: allOptions.audienceHundredMillion.value,
+          option: allOptions.audienceHundredMillion.label,
+        },
+        {
+          result: allOptions.awareHardToFind.value,
+          option: allOptions.awareHardToFind.label,
+        },
+        {
+          result: allOptions.lucrativeHundred.value,
+          option: allOptions.lucrativeHundred.label,
+        },
+        {
+          result: allOptions.liquidAnnual.value,
+          option: allOptions.liquidAnnual.label,
+        },
+        {
+          result: allOptions.trustYou.value,
+          option: allOptions.trustYou.label,
+        },
+        {
+          result: allOptions.competitionSomeFeatures.value,
+          option: allOptions.competitionSomeFeatures.label,
+        },
+        {
+          result: allOptions.enduringOneEvangelism.value,
+          option: allOptions.enduringOneEvangelism.label,
+        },
       ],
     },
   ];
@@ -562,7 +795,7 @@ const ViableStartupCalculator: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-3 items-center mt-2 mb-6 text-[10px] text-black gap-1">
                 {exampleArray.map((example) => (
                   <button
-                    className="border border-gray-300 py-2 rounded-lg"
+                    className={`border border-gray-300 py-2 rounded-lg ${example.color}`}
                     onClick={() =>
                       handleFillExampleData(
                         example.businessName,
@@ -571,7 +804,10 @@ const ViableStartupCalculator: React.FC = () => {
                       )
                     }
                   >
-                    {example.businessName}
+                    <div>{example.businessName}</div>
+                    <div className="text-[6px]">
+                      2022 Revenue: {example.revenue}
+                    </div>
                   </button>
                 ))}
               </div>
