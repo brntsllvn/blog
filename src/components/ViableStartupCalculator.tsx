@@ -115,7 +115,7 @@ const ViableStartupCalculator: React.FC = () => {
     let yPos = 20;
     let yGap = 4;
     let xPos = 10;
-    let titleSize = 10;
+    let titleSize = 12;
     let textSize = 8;
 
     doc.setFontSize(12);
@@ -160,6 +160,9 @@ const ViableStartupCalculator: React.FC = () => {
       yPos += yGap;
       doc.setFontSize(textSize);
       doc.text(selectedOptions[index], xPos, yPos);
+      yPos += yGap;
+      doc.setFontSize(textSize);
+      doc.text(`Rationale: ${reasons[index]}`, xPos, yPos);
       yPos += yGap;
     });
 
@@ -325,13 +328,13 @@ const ViableStartupCalculator: React.FC = () => {
         },
       ],
       options: [
-        { value: 1000000, label: "$1,000,000" },
-        { value: 100000, label: "$100,000" },
-        { value: 10000, label: "$10,000" },
-        { value: 1000, label: "$1,000" },
-        { value: 100, label: "$100" },
-        { value: 10, label: "$10" },
-        { value: 1, label: "$1" },
+        { value: 1000000, label: "$1,000,000 annual spend" },
+        { value: 100000, label: "$100,000 annual spend" },
+        { value: 10000, label: "$10,000 annual spend" },
+        { value: 1000, label: "$1,000 annual spend" },
+        { value: 100, label: "$100 annual spend" },
+        { value: 10, label: "$10 annual spend" },
+        { value: 1, label: "$1 annual spend" },
       ],
     },
     {
