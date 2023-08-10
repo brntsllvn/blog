@@ -794,7 +794,7 @@ const ViableStartupCalculator: React.FC = () => {
                     Save as PDF
                   </button>
                 </div>
-                <div className="flex justify-between gap-3 mt-2 text-[8px]">
+                <div className="flex justify-between mt-2 text-[6px]">
                   <div className="text-black">Scale-up: at least 4</div>
                   <div className="text-black">Self-fund: at least 2</div>
                   <div className="text-black">Not viable: less than 2</div>
@@ -937,6 +937,8 @@ const ViableStartupCalculator: React.FC = () => {
                     <a
                       href="https://www.amazon.com/Crossing-Chasm-3rd-Disruptive-Mainstream/dp/0062292986/ref=sr_1_1?keywords=crossing+the+chasm&qid=1691701799&s=books&sprefix=crossing+the+ch%2Cstripbooks%2C171&sr=1-1"
                       className="underline"
+                      target="_blank"
+                      rel="noreferrer"
                     >
                       Crossing The Chasm
                     </a>
@@ -947,6 +949,8 @@ const ViableStartupCalculator: React.FC = () => {
                     <a
                       href="https://www.linkedin.com/posts/peterjameswalker_cartadata-seed-fundraising-activity-7091839982151090176-QuPU"
                       className="underline"
+                      target="_blank"
+                      rel="noreferrer"
                     >
                       Carta industry seed round data
                     </a>
@@ -965,6 +969,8 @@ const ViableStartupCalculator: React.FC = () => {
                     <a
                       href="https://www.amazon.com/Cold-Start-Problem-Andrew-Chen/dp/0062969749"
                       className="underline"
+                      target="_blank"
+                      rel="noreferrer"
                     >
                       The Cold Start Problem
                     </a>
@@ -975,6 +981,8 @@ const ViableStartupCalculator: React.FC = () => {
                     <a
                       href="https://www.hustlefund.vc/blog-posts-founders/the-mechanics-of-unit-economics"
                       className="underline"
+                      target="_blank"
+                      rel="noreferrer"
                     >
                       here
                     </a>{" "}
@@ -982,6 +990,8 @@ const ViableStartupCalculator: React.FC = () => {
                     <a
                       href="https://www.hustlefund.vc/blog-posts-founders/top-of-mind-why-unit-economics-matter"
                       className="underline"
+                      target="_blank"
+                      rel="noreferrer"
                     >
                       here
                     </a>
@@ -994,11 +1004,13 @@ const ViableStartupCalculator: React.FC = () => {
                   the business characteristics? Does this align with your
                   intuition?
                 </p>
-                <div className="text-[8px] font-normal">
+                <div className="text-xs font-normal">
                   (In his{" "}
                   <a
                     href="https://www.youtube.com/watch?v=otbnC2zE2rw"
                     className="underline"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     conference talk
                   </a>{" "}
