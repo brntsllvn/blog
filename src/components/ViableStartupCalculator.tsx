@@ -19,9 +19,9 @@ interface InputProps {
   guidance: string;
   resources: Resource[];
   options: Option[];
+  selectedOption: string;
   onResultChange: (result: number) => void;
   onOptionChange: (option: string) => void;
-  selectedOption: string;
 }
 
 const InputWithDropdown: React.FC<InputProps> = ({
@@ -31,9 +31,9 @@ const InputWithDropdown: React.FC<InputProps> = ({
   guidance,
   resources,
   options,
+  selectedOption,
   onResultChange,
   onOptionChange,
-  selectedOption,
 }) => {
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
@@ -53,8 +53,8 @@ const InputWithDropdown: React.FC<InputProps> = ({
       <div className="text-[8px]">{`Estimate: ${task}`}</div>
       <div className="text-[8px]">{`Question: ${question}`}</div>
       <div className="text-[8px] font-bold">{`Guidance: ${guidance}`}</div>
-      <div className="flex text-[8px] gap-1 pb-1">
-        <div>Sources:</div>
+      <div className="flex text-[8px] gap-1">
+        <div>Resources:</div>
         {resources.map((r) => (
           <a
             target="_blank"
@@ -91,6 +91,15 @@ const ViableStartupCalculator: React.FC = () => {
     0, 0, 0, 0, 0, 0, 0,
   ]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+  const [reasons, setReasons] = useState<string[]>([
     "",
     "",
     "",
@@ -174,6 +183,14 @@ const ViableStartupCalculator: React.FC = () => {
       const newOptions = [...prevOptions];
       newOptions[index] = option;
       return newOptions;
+    });
+  };
+
+  const handleReasonChange = (index: number, reason: string) => {
+    setReasons((prevReasons) => {
+      const newReasons = [...prevReasons];
+      newReasons[index] = reason;
+      return newReasons;
     });
   };
 
@@ -486,7 +503,7 @@ const ViableStartupCalculator: React.FC = () => {
         <div
           className={`w-full max-w-md mx-auto px-4 py-8 ${bgColorClass} rounded-lg shadow-md`}
         >
-          <h1 className="text-black text-2xl font-bold text-center mb-2">
+          <h1 className="text-black text-3xl font-bold text-center mb-2">
             Is My Startup Viable?
           </h1>
           <div className="text-[8px] text-center mb-1">
@@ -525,15 +542,13 @@ const ViableStartupCalculator: React.FC = () => {
             for additional context
           </div>
           <div className="flex justify-between items-center mt-2">
-            <div className="text-black font-semibold text-sm">
-              Score: {totalResult}
-            </div>
-            <div className="text-black font-semibold text-sm">
+            <div className="text-black font-semibold">Score: {totalResult}</div>
+            <div className="text-black font-semibold">
               Result: {calculateResult(totalResult)}
             </div>
             <button
               onClick={downloadPDF}
-              className="text-black font-semibold text-sm border border-gray-300 py-1 px-2 rounded-lg"
+              className="text-black font-semibold border border-gray-300 py-1 px-2 rounded-lg"
             >
               Save as PDF
             </button>
@@ -541,10 +556,10 @@ const ViableStartupCalculator: React.FC = () => {
           <div>
             <div className="border-b border-gray-400">
               <div className="text-[8px] mt-4">Examples</div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 items-center mt-4 mb-6 text-[8px] text-black gap-3 ">
+              <div className="grid grid-cols-1 sm:grid-cols-3 items-center mt-2 mb-6 text-[10px] text-black gap-1">
                 {exampleArray.map((example) => (
                   <button
-                    className="border border-gray-300 py-1 rounded-lg"
+                    className="border border-gray-300 py-2 rounded-lg"
                     onClick={() =>
                       handleFillExampleData(
                         example.businessName,
@@ -589,22 +604,34 @@ const ViableStartupCalculator: React.FC = () => {
               </div>
             </div>
             {optionsArray.map((optionData, index) => (
-              <InputWithDropdown
-                key={index}
-                label={optionData.label}
-                task={optionData.task}
-                question={optionData.question}
-                guidance={optionData.guidance}
-                resources={optionData.resources}
-                options={optionData.options}
-                onResultChange={(result) =>
-                  handleInputResultChange(index, result)
-                }
-                onOptionChange={(option) =>
-                  handleInputOptionChange(index, option)
-                }
-                selectedOption={selectedOptions[index]}
-              />
+              <div>
+                <InputWithDropdown
+                  key={index}
+                  label={optionData.label}
+                  task={optionData.task}
+                  question={optionData.question}
+                  guidance={optionData.guidance}
+                  resources={optionData.resources}
+                  options={optionData.options}
+                  selectedOption={selectedOptions[index]}
+                  onResultChange={(result) =>
+                    handleInputResultChange(index, result)
+                  }
+                  onOptionChange={(option) =>
+                    handleInputOptionChange(index, option)
+                  }
+                />
+                <div className="pb-1 flex gap-1">
+                  <span className="text-black text-[8px]">Why?</span>
+                  <input
+                    className="form-input block w-full rounded-md bg-white-200 text-black text-[8px] h-3 pl-2"
+                    type="text"
+                    value={reasons[index]}
+                    onChange={(e) => handleReasonChange(index, e.target.value)}
+                    placeholder="Record your rationale..."
+                  />
+                </div>
+              </div>
             ))}
           </div>
         </div>
