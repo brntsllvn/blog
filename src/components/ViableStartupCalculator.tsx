@@ -779,19 +779,36 @@ const ViableStartupCalculator: React.FC = () => {
                 </a>{" "}
                 for additional context
               </div>
-              <div className="flex justify-between items-center mt-2">
-                <div className="text-black font-semibold">
-                  Score: {totalResult}
+              <div className="pb-4 border-b border-gray-400">
+                <div className="flex justify-between items-center mt-2">
+                  <div className="text-black font-semibold">
+                    Score: {totalResult}
+                  </div>
+                  <div className="text-black font-semibold">
+                    Result: {calculateResult(totalResult)}
+                  </div>
+                  <button
+                    onClick={downloadPDF}
+                    className="text-black font-semibold border border-gray-300 py-1 px-2 rounded-lg"
+                  >
+                    Save as PDF
+                  </button>
                 </div>
-                <div className="text-black font-semibold">
-                  Result: {calculateResult(totalResult)}
+                <div className="flex justify-between gap-3 mt-2 text-[8px]">
+                  <div className="text-black">Scale-up: at least 4</div>
+                  <div className="text-black">Self-fund: at least 2</div>
+                  <div className="text-black">Not viable: less than 2</div>
+                  <div className="text-black">
+                    <a
+                      className="underline"
+                      href="https://longform.asmartbear.com/problem/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      See exceptions
+                    </a>
+                  </div>
                 </div>
-                <button
-                  onClick={downloadPDF}
-                  className="text-black font-semibold border border-gray-300 py-1 px-2 rounded-lg"
-                >
-                  Save as PDF
-                </button>
               </div>
               <div>
                 <div className="border-b border-gray-400">
@@ -886,7 +903,109 @@ const ViableStartupCalculator: React.FC = () => {
         </div>
         <div id="notes">
           <div className="min-h-min flex items-center justify-center px-2 mt-8">
-            <h1>hello</h1>
+            <div
+              className={`w-full max-w-md mx-auto px-4 py-8 ${bgColorClass} rounded-lg shadow-md text-center`}
+            >
+              <div className="text-black text-3xl font-bold text-center">
+                <h2 className="my-1">Feedback?</h2>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline text-sm font-normal"
+                  href="mailto:brent@adthatch.com?subject=I%20tried%20your%20viable%20startup%20calculator%20and..."
+                >
+                  Email
+                </a>
+                {"   "}
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline text-sm font-normal"
+                  href="https://www.linkedin.com/in/brntsllvn"
+                >
+                  LinkedIn
+                </a>
+                <h2 className="my-4">What's Missing?</h2>
+                <p className="text-sm font-normal mb-4">
+                  I assume the following elements are <b>mostly</b> captured by
+                  the dropdowns above, but here's a list for completeness...
+                </p>
+                <ul className="text-xs font-normal text-left list-disc ml-4 lg:ml-6 space-y-0">
+                  <li>Go-to-market strategy</li>
+                  <li>
+                    Barriers to scalability (see{" "}
+                    <a
+                      href="https://www.amazon.com/Crossing-Chasm-3rd-Disruptive-Mainstream/dp/0062292986/ref=sr_1_1?keywords=crossing+the+chasm&qid=1691701799&s=books&sprefix=crossing+the+ch%2Cstripbooks%2C171&sr=1-1"
+                      className="underline"
+                    >
+                      Crossing The Chasm
+                    </a>
+                    )
+                  </li>
+                  <li>
+                    Industry-specific nuance (see{" "}
+                    <a
+                      href="https://www.linkedin.com/posts/peterjameswalker_cartadata-seed-fundraising-activity-7091839982151090176-QuPU"
+                      className="underline"
+                    >
+                      Carta industry seed round data
+                    </a>
+                    )
+                  </li>
+                  <li>Moat analysis</li>
+                  <li>
+                    Type of solution: hardware, software, consumable,
+                    consulting, etc.
+                  </li>
+                  <li>
+                    Nature of solution: system of record/engagement/decision
+                  </li>
+                  <li>
+                    Social atomic unit (see{" "}
+                    <a
+                      href="https://www.amazon.com/Cold-Start-Problem-Andrew-Chen/dp/0062969749"
+                      className="underline"
+                    >
+                      The Cold Start Problem
+                    </a>
+                    )
+                  </li>
+                  <li>
+                    Unit economics (or CAC/LTV) (see Hustle Fund{" "}
+                    <a
+                      href="https://www.hustlefund.vc/blog-posts-founders/the-mechanics-of-unit-economics"
+                      className="underline"
+                    >
+                      here
+                    </a>{" "}
+                    and{" "}
+                    <a
+                      href="https://www.hustlefund.vc/blog-posts-founders/top-of-mind-why-unit-economics-matter"
+                      className="underline"
+                    >
+                      here
+                    </a>
+                    )
+                  </li>
+                </ul>
+                <h2 className="my-4">Interesting</h2>
+                <p className="text-sm font-normal">
+                  What happens if you set a result target (e.g. 4) and back out
+                  the business characteristics? Does this align with your
+                  intuition?
+                </p>
+                <div className="text-[8px] font-normal">
+                  (In his{" "}
+                  <a
+                    href="https://www.youtube.com/watch?v=otbnC2zE2rw"
+                    className="underline"
+                  >
+                    conference talk
+                  </a>{" "}
+                  Jason compares his analysis to a constraint solver problem)
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
