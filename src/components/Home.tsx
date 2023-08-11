@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Nav from "./Nav";
+import Article from "./Article";
 
 function Home() {
   return (
@@ -35,19 +36,59 @@ function Home() {
               .
             </p>
             <div className="mt-10 space-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16">
-              <article className="max-w-xl flex-col items-start">
-                <div className="flex items-center gap-x-4 text-xs"></div>
-                <div className="group relative">
-                  <time className="text-gray-500">Aug 4, 2023</time>
-                  <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                    <Link to="/is-my-startup-viable-calculator">
-                      Calculator: Is My Startup Viable?
-                    </Link>
-                  </h3>
+              <Article
+                date="Aug 11, 2023"
+                title="Next week I'm teaming up with 3 other founders on a startup
+                hackathon. Here's what I want to learn."
+                content={
+                  <ul className="mt-5 text-sm leading-6 text-gray-600 list-disc text-left pl-4">
+                    <li>Team: Is everyone ready to work?</li>
+                    <li>Team: Can we align on a single objective?</li>
+                    <li>Team: Can we deliver?</li>
+                    <li>Team: Can we iterate?</li>
+                    <li>Team: Are our skills meaningfully complementary?</li>
+                    <li>Team: Should we continue working together?</li>
+                    <li>Customer: Who is our customer?</li>
+                    <li>Customer: How big is the audience?</li>
+                    <li>
+                      Customer: Do they have a specific problem worth solving?
+                    </li>
+                    <li>Customer: What's the customer's budget?</li>
+                    <li>Customer: How urgent/important is the problem?</li>
+                    <li>Customer: Is the problem (naturally) recurring?</li>
+                    <li>Customer: How often do customers make a change?</li>
+                    <li>Customer: What barriers exist to making a change?</li>
+                    <li>
+                      Customer: What barriers exist to customers choosing us
+                      specifically?
+                    </li>
+                    <li>Customer: How do we find customers?</li>
+                    <li>
+                      Competition: How do we separate ourselves from
+                      competitors?
+                    </li>
+                    <li>
+                      Competition: Can we do something outrageously different?
+                    </li>
+                    <li>Product: What is the goal of the MVP?</li>
+                    <li>Product: What is the MVP?</li>
+                    <li>Product: Technical barriers to delivery?</li>
+                    <li>Product: Do customers want our solution?</li>
+                  </ul>
+                }
+              />
+              <Article
+                date="Aug 10, 2023"
+                title={
+                  <Link to="/is-my-startup-viable-calculator">
+                    Calculator: Is My Startup Viable?
+                  </Link>
+                }
+                content={
                   <ul className="mt-5 text-sm leading-6 text-gray-600 list-disc text-left pl-4">
                     <li>
-                      Yesterday, my co-founder and I decided to walk away from
-                      our revenue-generating startup.
+                      Last week, my co-founder and I walked away from our
+                      revenue-generating startup
                     </li>
                     <li>
                       After analyzing our target audience, business model, and
@@ -98,8 +139,8 @@ function Home() {
                       .
                     </li>
                   </ul>
-                </div>
-              </article>
+                }
+              />
             </div>
           </div>
         </div>
