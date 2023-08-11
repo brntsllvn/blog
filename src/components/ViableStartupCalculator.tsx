@@ -139,6 +139,20 @@ const ViableStartupCalculator: React.FC = () => {
     yPos += yGap + 5;
 
     doc.setFontSize(titleSize);
+    doc.text(`Score: ${totalResult}`, xPos, yPos);
+    yPos += yGap + 1;
+    doc.setFontSize(titleSize);
+    doc.text(`Result: ${calculateResult(totalResult)}`, xPos, yPos);
+    yPos += yGap - 1;
+    doc.setFontSize(textSize - 3);
+    doc.text(">= 4: vc-backable", xPos, yPos);
+    yPos += yGap - 1;
+    doc.text(">= 2: bootstrap", xPos, yPos);
+    yPos += yGap - 1;
+    doc.text("< 2: not viable", xPos, yPos);
+    yPos += yGap + 5;
+
+    doc.setFontSize(titleSize);
     doc.text("Name of Startup", xPos, yPos);
     yPos += yGap;
     doc.setFontSize(textSize);
@@ -167,13 +181,8 @@ const ViableStartupCalculator: React.FC = () => {
     });
 
     yPos += yGap;
-    doc.setFontSize(titleSize);
-    doc.text(`Score: ${totalResult.toFixed(2)}`, xPos, yPos); // rounded to two decimal places
-    yPos += yGap;
-    doc.setFontSize(textSize);
-    doc.text(`Result: ${calculateResult(totalResult)}`, xPos, yPos);
+
     doc.setFontSize(textSize - 3);
-    yPos += yGap + 5;
     const timestamp =
       new Date().toISOString().replace("T", " ").split(".")[0] + " UTC";
     doc.text(`Calculated ${timestamp}`, xPos, yPos);
@@ -233,13 +242,13 @@ const ViableStartupCalculator: React.FC = () => {
 
   const calculateResult = (totalResult: number) => {
     if (totalResult >= 4) {
-      return "Scale Up";
+      return "VC-Backable";
     } else if (totalResult >= 2) {
-      return "Self-Fund";
+      return "Bootstrap";
     } else if (totalResult === 0) {
       return "TBD";
     } else {
-      return "Not viable";
+      return "Not Viable";
     }
   };
 
@@ -363,7 +372,7 @@ const ViableStartupCalculator: React.FC = () => {
       guidance: "Go B2B. Businesses pay for solutions. Consumers hate spending",
       resources: [
         {
-          label: "Jason's talk",
+          label: "Excuse Me",
           url: "https://www.youtube.com/watch?v=otbnC2zE2rw&t=24m28s",
         },
         {
@@ -392,7 +401,7 @@ const ViableStartupCalculator: React.FC = () => {
           url: "https://www.momtestbook.com/",
         },
         {
-          label: "Startup Owner's Manual",
+          label: "Owner's Manual",
           url: "https://steveblank.com/startup-owners-manual-1in/",
         },
       ],
@@ -422,7 +431,7 @@ const ViableStartupCalculator: React.FC = () => {
           url: "https://www.momtestbook.com/",
         },
         {
-          label: "Startup Owner's Manual",
+          label: "Owner's Manual",
           url: "https://steveblank.com/startup-owners-manual-1in/",
         },
       ],
@@ -478,12 +487,8 @@ const ViableStartupCalculator: React.FC = () => {
         "Even better than different is to be extreme in that difference",
       resources: [
         {
-          label: "Worse, but unique",
+          label: "Worse, But Unique",
           url: "https://longform.asmartbear.com/worse-but-unique/",
-        },
-        {
-          label: "Purple Cow",
-          url: "https://en.wikipedia.org/wiki/Purple_Cow:_Transform_Your_Business_by_Being_Remarkable",
         },
         {
           label: "So Good They Can't Ignore You",
@@ -504,12 +509,8 @@ const ViableStartupCalculator: React.FC = () => {
         "5%/mo cancellation leads to 50% annual loss. Even one-offs need repeat revenue",
       resources: [
         {
-          label: "Naturally recurring revenue",
+          label: "Naturally Recurring",
           url: "https://www.youtube.com/watch?v=otbnC2zE2rw&t=28m57s",
-        },
-        {
-          label: "Impossible to become a unicorn with high churn",
-          url: "https://cloud.substack.com/p/my-top-10-mistakes-in-10-years-gainsight#%C2%A7mistake-not-starting-act-ii-fast-enough",
         },
       ],
       options: [
@@ -533,12 +534,12 @@ const ViableStartupCalculator: React.FC = () => {
           option: allOptions.audienceHundredMillion.label,
         },
         {
-          result: allOptions.awareThoughtLeaders.value,
-          option: allOptions.awareThoughtLeaders.label,
-        },
-        {
           result: allOptions.budgetHundred.value,
           option: allOptions.budgetHundred.label,
+        },
+        {
+          result: allOptions.awareThoughtLeaders.value,
+          option: allOptions.awareThoughtLeaders.label,
         },
         {
           result: allOptions.liquidRare.value,
@@ -569,12 +570,12 @@ const ViableStartupCalculator: React.FC = () => {
           option: allOptions.audienceTenMillion.label,
         },
         {
-          result: allOptions.awareHardToFind.value,
-          option: allOptions.awareHardToFind.label,
-        },
-        {
           result: allOptions.budgetHundred.value,
           option: allOptions.budgetHundred.label,
+        },
+        {
+          result: allOptions.awareHardToFind.value,
+          option: allOptions.awareHardToFind.label,
         },
         {
           result: allOptions.liquidRare.value,
@@ -605,12 +606,12 @@ const ViableStartupCalculator: React.FC = () => {
           option: allOptions.audienceBillion.label,
         },
         {
-          result: allOptions.awareFewAgree.value,
-          option: allOptions.awareFewAgree.label,
-        },
-        {
           result: allOptions.budgetTen.value,
           option: allOptions.budgetTen.label,
+        },
+        {
+          result: allOptions.awareFewAgree.value,
+          option: allOptions.awareFewAgree.label,
         },
         {
           result: allOptions.liquidRare.value,
@@ -641,12 +642,12 @@ const ViableStartupCalculator: React.FC = () => {
           option: allOptions.audienceBillion.label,
         },
         {
-          result: allOptions.awareHardToFind.value,
-          option: allOptions.awareHardToFind.label,
-        },
-        {
           result: allOptions.budgetHundred.value,
           option: allOptions.budgetHundred.label,
+        },
+        {
+          result: allOptions.awareHardToFind.value,
+          option: allOptions.awareHardToFind.label,
         },
         {
           result: allOptions.liquidAlways.value,
@@ -677,12 +678,12 @@ const ViableStartupCalculator: React.FC = () => {
           option: allOptions.audienceMillion.label,
         },
         {
-          result: allOptions.awareIndustryStandard.value,
-          option: allOptions.awareIndustryStandard.label,
-        },
-        {
           result: allOptions.budgetThousand.value,
           option: allOptions.budgetThousand.label,
+        },
+        {
+          result: allOptions.awareIndustryStandard.value,
+          option: allOptions.awareIndustryStandard.label,
         },
         {
           result: allOptions.liquidAlways.value,
@@ -713,12 +714,12 @@ const ViableStartupCalculator: React.FC = () => {
           option: allOptions.audienceHundredMillion.label,
         },
         {
-          result: allOptions.awareHardToFind.value,
-          option: allOptions.awareHardToFind.label,
-        },
-        {
           result: allOptions.budgetHundred.value,
           option: allOptions.budgetHundred.label,
+        },
+        {
+          result: allOptions.awareHardToFind.value,
+          option: allOptions.awareHardToFind.label,
         },
         {
           result: allOptions.liquidAnnual.value,
@@ -792,15 +793,15 @@ const ViableStartupCalculator: React.FC = () => {
               </div>
               <div className="pb-4 border-b border-gray-400">
                 <div className="flex justify-between items-center mt-2">
-                  <div className="text-black font-semibold">
+                  <div className="text-black text-sm font-semibold">
                     Score: {totalResult}
                   </div>
-                  <div className="text-black font-semibold">
+                  <div className="text-black text-sm font-semibold">
                     Result: {calculateResult(totalResult)}
                   </div>
                   <button
                     onClick={downloadPDF}
-                    className="text-black font-semibold border border-gray-300 py-1 px-2 rounded-lg"
+                    className="text-black text-sm font-semibold border border-gray-300 py-1 px-2 rounded-lg"
                   >
                     Save as PDF
                   </button>
@@ -942,18 +943,33 @@ const ViableStartupCalculator: React.FC = () => {
                 >
                   LinkedIn
                 </a>
-                <h2 className="my-4">Constraints</h2>
+                <h2 className="my-4">Compelling Constraints</h2>
                 <p className="text-sm font-normal">
                   What happens if you set a result target (e.g. 4) and back out
                   the business characteristics? Does this align with your
                   intuition?
                 </p>
+                {/* <p className="text-sm font-normal mb-4">
+                  Note the following relationships...
+                </p>
+                <ul className="text-xs font-normal text-left list-disc ml-4 lg:ml-6 space-y-0">
+                  <li>
+                    Audience size is inversely related to budget
+                  </li>
+                  <li>
+                    Liquidity is inversely related to endurance
+                  </li>
+                  <li>
+                    Liquidity is <i>inversely related</i> to endurance
+                  </li>
+                </ul> */}
                 <h2 className="my-4">What's Missing?</h2>
                 <p className="text-sm font-normal mb-4">
                   The following elements are <i>sorta</i> captured by the
                   questions above, but here's a list for completeness...
                 </p>
                 <ul className="text-xs font-normal text-left list-disc ml-4 lg:ml-6 space-y-0">
+                  <li>Merits of B2B over consumer</li>
                   <li>Go-to-market strategy</li>
                   <li>
                     Barriers to scalability (see{" "}
@@ -975,7 +991,7 @@ const ViableStartupCalculator: React.FC = () => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Carta data
+                      Carta
                     </a>
                     )
                   </li>
