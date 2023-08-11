@@ -49,7 +49,7 @@ const InputWithDropdown: React.FC<InputProps> = ({
 
   return (
     <div className="py-2 pb-1">
-      <div className="text-xl">{label}</div>
+      <div className="text-2xl">{label}</div>
       <div className="text-[8px]">{`Estimate: ${task}`}</div>
       <div className="text-[8px]">{`Question: ${question}`}</div>
       <div className="text-[8px] font-bold">{`Guidance: ${guidance}`}</div>
@@ -70,7 +70,7 @@ const InputWithDropdown: React.FC<InputProps> = ({
         <select
           value={selectedOption || ""}
           onChange={handleOptionChange}
-          className="form-select mt-1 block w-full rounded-md bg-white-200 text-gray-800"
+          className="form-select mt-1 block w-full rounded-md bg-white-200 text-gray-800 text-xl bg-blue-200"
         >
           <option value="" disabled>
             Select an option
@@ -221,6 +221,14 @@ const ViableStartupCalculator: React.FC = () => {
     return inputResults.reduce((total, result) => total * result, 1) / 625000;
   };
 
+  const handleBizBasicsChange = (index: number, label: string) => {
+    setBusinessLabels((prevLabels) => {
+      const newLabels = [...prevLabels];
+      newLabels[index] = label;
+      return newLabels;
+    });
+  };
+
   const totalResult = calculateTotalResult();
 
   const calculateResult = (totalResult: number) => {
@@ -239,13 +247,13 @@ const ViableStartupCalculator: React.FC = () => {
     if (totalResult >= 10) {
       return "bg-green-400";
     } else if (totalResult >= 4) {
-      return "bg-green-300";
-    } else if (totalResult >= 2) {
       return "bg-green-200";
+    } else if (totalResult >= 2) {
+      return "bg-green-100";
     } else if (totalResult >= 1) {
-      return "bg-red-300";
+      return "bg-red-200";
     } else if (totalResult >= 0.1) {
-      return "bg-red-400";
+      return "bg-red-300";
     } else if (totalResult === 0) {
       return "bg-stone-100";
     } else {
@@ -280,27 +288,27 @@ const ViableStartupCalculator: React.FC = () => {
     audienceThousand: { value: 1000, label: "1,000 businesses or people" },
     awareFewAgree: {
       value: 0.01,
-      label: "0.01: Few know or care they have the problem",
+      label: "0.01: Few know or care to solve",
     },
     awareThoughtLeaders: {
       value: 0.1,
-      label: "0.1: Thought-leaders care about solving the problem",
+      label: "0.1: Thought-leaders want it solved",
     },
     awareIndustryStandard: {
       value: 0.5,
-      label: "0.5: Industry standard practice to solve the problem",
+      label: "0.5: Many people want it solved",
     },
     awareHardToFind: {
       value: 1.0,
-      label: "1: Almost everyone must solve the problem",
+      label: "1: Almost everyone wants it solved",
     },
-    lucrativeMillion: { value: 1000000, label: "$1,000,000 annual spend" },
-    lucrativeHundredThousand: { value: 100000, label: "$100,000 annual spend" },
-    lucrativeTenThousand: { value: 10000, label: "$10,000 annual spend" },
-    lucrativeThousand: { value: 1000, label: "$1,000 annual spend" },
-    lucrativeHundred: { value: 100, label: "$100 annual spend" },
-    lucrativeTen: { value: 10, label: "$10 annual spend" },
-    lucrativeOne: { value: 1, label: "$1 annual spend" },
+    budgetMillion: { value: 1000000, label: "$1,000,000 annual spend" },
+    budgetHundredThousand: { value: 100000, label: "$100,000 annual spend" },
+    budgetTenThousand: { value: 10000, label: "$10,000 annual spend" },
+    budgetThousand: { value: 1000, label: "$1,000 annual spend" },
+    budgetHundred: { value: 100, label: "$100 annual spend" },
+    budgetTen: { value: 10, label: "$10 annual spend" },
+    budgetOne: { value: 1, label: "$1 annual spend" },
     liquidRare: {
       value: 0.01,
       label: "0.01: Switch every few years, hard to switch",
@@ -374,6 +382,31 @@ const ViableStartupCalculator: React.FC = () => {
       ],
     },
     {
+      label: "Budget",
+      task: "Customers' annual budget for the problem",
+      question: "If there's budget at all, is the budget large enough?",
+      guidance: "Many great ideas solve real problems with no budget and fail",
+      resources: [
+        {
+          label: "Mom Test",
+          url: "https://www.momtestbook.com/",
+        },
+        {
+          label: "Startup Owner's Manual",
+          url: "https://steveblank.com/startup-owners-manual-1in/",
+        },
+      ],
+      options: [
+        allOptions.budgetMillion,
+        allOptions.budgetHundredThousand,
+        allOptions.budgetTenThousand,
+        allOptions.budgetThousand,
+        allOptions.budgetHundred,
+        allOptions.budgetTen,
+        allOptions.budgetOne,
+      ],
+    },
+    {
       label: "Aware",
       task: "How urgent/important it is for your audience to solve the problem",
       question:
@@ -381,15 +414,15 @@ const ViableStartupCalculator: React.FC = () => {
       guidance: "The goal is to uncover the truth, not to sell",
       resources: [
         {
-          label: "Jason on customer development",
+          label: "Customer Development",
           url: "https://longform.asmartbear.com/customer-development/",
         },
         {
-          label: "The Mom Test",
+          label: "Mom Test",
           url: "https://www.momtestbook.com/",
         },
         {
-          label: "The Startup Owner's Manual",
+          label: "Startup Owner's Manual",
           url: "https://steveblank.com/startup-owners-manual-1in/",
         },
       ],
@@ -398,31 +431,6 @@ const ViableStartupCalculator: React.FC = () => {
         allOptions.awareThoughtLeaders,
         allOptions.awareIndustryStandard,
         allOptions.awareHardToFind,
-      ],
-    },
-    {
-      label: "Lucrative",
-      task: "Customers' annual budget for the problem",
-      question: "If there's budget at all, is the budget large enough?",
-      guidance: "Many great ideas solve real problems with no budget and fail",
-      resources: [
-        {
-          label: "The Mom Test",
-          url: "https://www.momtestbook.com/",
-        },
-        {
-          label: "The Startup Owner's Manual",
-          url: "https://steveblank.com/startup-owners-manual-1in/",
-        },
-      ],
-      options: [
-        allOptions.lucrativeMillion,
-        allOptions.lucrativeHundredThousand,
-        allOptions.lucrativeTenThousand,
-        allOptions.lucrativeThousand,
-        allOptions.lucrativeHundred,
-        allOptions.lucrativeTen,
-        allOptions.lucrativeOne,
       ],
     },
     {
@@ -446,11 +454,11 @@ const ViableStartupCalculator: React.FC = () => {
       guidance: "Combine joy, skill, and need for 'Love' products",
       resources: [
         {
-          label: "Jason on willingness to pay",
+          label: "Willingness to Pay",
           url: "https://longform.asmartbear.com/willingness-to-pay/",
         },
         {
-          label: "Jason on fulfillment",
+          label: "Fulfillment",
           url: "https://longform.asmartbear.com/fulfillment/",
         },
       ],
@@ -529,8 +537,8 @@ const ViableStartupCalculator: React.FC = () => {
           option: allOptions.awareThoughtLeaders.label,
         },
         {
-          result: allOptions.lucrativeHundred.value,
-          option: allOptions.lucrativeHundred.label,
+          result: allOptions.budgetHundred.value,
+          option: allOptions.budgetHundred.label,
         },
         {
           result: allOptions.liquidRare.value,
@@ -565,8 +573,8 @@ const ViableStartupCalculator: React.FC = () => {
           option: allOptions.awareHardToFind.label,
         },
         {
-          result: allOptions.lucrativeHundred.value,
-          option: allOptions.lucrativeHundred.label,
+          result: allOptions.budgetHundred.value,
+          option: allOptions.budgetHundred.label,
         },
         {
           result: allOptions.liquidRare.value,
@@ -601,8 +609,8 @@ const ViableStartupCalculator: React.FC = () => {
           option: allOptions.awareFewAgree.label,
         },
         {
-          result: allOptions.lucrativeTen.value,
-          option: allOptions.lucrativeTen.label,
+          result: allOptions.budgetTen.value,
+          option: allOptions.budgetTen.label,
         },
         {
           result: allOptions.liquidRare.value,
@@ -637,8 +645,8 @@ const ViableStartupCalculator: React.FC = () => {
           option: allOptions.awareHardToFind.label,
         },
         {
-          result: allOptions.lucrativeHundred.value,
-          option: allOptions.lucrativeHundred.label,
+          result: allOptions.budgetHundred.value,
+          option: allOptions.budgetHundred.label,
         },
         {
           result: allOptions.liquidAlways.value,
@@ -673,8 +681,8 @@ const ViableStartupCalculator: React.FC = () => {
           option: allOptions.awareIndustryStandard.label,
         },
         {
-          result: allOptions.lucrativeThousand.value,
-          option: allOptions.lucrativeThousand.label,
+          result: allOptions.budgetThousand.value,
+          option: allOptions.budgetThousand.label,
         },
         {
           result: allOptions.liquidAlways.value,
@@ -709,8 +717,8 @@ const ViableStartupCalculator: React.FC = () => {
           option: allOptions.awareHardToFind.label,
         },
         {
-          result: allOptions.lucrativeHundred.value,
-          option: allOptions.lucrativeHundred.label,
+          result: allOptions.budgetHundred.value,
+          option: allOptions.budgetHundred.label,
         },
         {
           result: allOptions.liquidAnnual.value,
@@ -744,6 +752,9 @@ const ViableStartupCalculator: React.FC = () => {
               <h1 className="text-black text-3xl font-bold text-center mb-2">
                 Is My Startup Viable?
               </h1>
+              <h2 className="text-[16px] text-center mb-3">
+                For bootstrapped and vc-backable startups
+              </h2>
               <div className="text-[8px] text-center mb-1">
                 Based on Jason Cohen's{" "}
                 <a
@@ -794,10 +805,10 @@ const ViableStartupCalculator: React.FC = () => {
                     Save as PDF
                   </button>
                 </div>
-                <div className="flex justify-between mt-2 text-[6px]">
-                  <div className="text-black">Scale-up: at least 4</div>
-                  <div className="text-black">Self-fund: at least 2</div>
-                  <div className="text-black">Not viable: less than 2</div>
+                <div className="flex items-center justify-center gap-x-3 mt-2 text-[7px]">
+                  <div className="text-black">4 or more: vc-backable</div>
+                  <div className="text-black">2 or more: bootstrap</div>
+                  <div className="text-black">less than 2: not viable</div>
                   <div className="text-black">
                     <a
                       className="underline"
@@ -812,8 +823,8 @@ const ViableStartupCalculator: React.FC = () => {
               </div>
               <div>
                 <div className="border-b border-gray-400">
-                  <div className="text-[8px] mt-4">Examples</div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 items-center mt-2 mb-6 text-[10px] text-black gap-1">
+                  <div className="text-xl mt-4">Examples</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 items-center mt-2 mb-6 text-[12px] text-black gap-1">
                     {exampleArray.map((example) => (
                       <button
                         className={`border border-gray-300 py-2 rounded-lg ${example.color}`}
@@ -826,7 +837,7 @@ const ViableStartupCalculator: React.FC = () => {
                         }
                       >
                         <div>{example.businessName}</div>
-                        <div className="text-[6px]">
+                        <div className="text-[8px]">
                           2022 Revenue: {example.revenue}
                         </div>
                       </button>
@@ -836,31 +847,37 @@ const ViableStartupCalculator: React.FC = () => {
                 <div className="rounded-lg mt-4 mt-10">
                   <div className="py-2 pb-1">
                     <label className="block">
-                      <span className="text-black text-xl">
+                      <span className="text-black text-2xl">
                         Name of startup
                       </span>
                       <div className="text-[8px] pb-1">
                         Helpful for capturing the business in one(ish) word
                       </div>
                       <input
-                        className="form-input block w-full rounded-md bg-white-200 text-black text-sm p-2 h-5"
+                        className="form-input block w-full rounded-md bg-white-200 text-black text-xl p-2 h-6 bg-blue-200"
                         type="text"
                         value={businessLabels[0]}
+                        onChange={(e) =>
+                          handleBizBasicsChange(0, e.target.value)
+                        }
                       />
                     </label>
                   </div>
                   <div className="py-2 pb-1">
                     <label className="block">
-                      <span className="text-black text-xl">
+                      <span className="text-black text-2xl">
                         Startup idea in one sentence
                       </span>
                       <div className="text-[8px] pb-1">
                         What would the "h1" tag on your main landing page say?
                       </div>
                       <input
-                        className="form-input block w-full rounded-md bg-white-200 text-black text-sm p-2 h-5"
+                        className="form-input block w-full rounded-md bg-white-200 text-black text-xl p-2 h-6 bg-blue-200"
                         type="text"
                         value={businessLabels[1]}
+                        onChange={(e) =>
+                          handleBizBasicsChange(1, e.target.value)
+                        }
                       />
                     </label>
                   </div>
@@ -925,10 +942,16 @@ const ViableStartupCalculator: React.FC = () => {
                 >
                   LinkedIn
                 </a>
+                <h2 className="my-4">Constraints</h2>
+                <p className="text-sm font-normal">
+                  What happens if you set a result target (e.g. 4) and back out
+                  the business characteristics? Does this align with your
+                  intuition?
+                </p>
                 <h2 className="my-4">What's Missing?</h2>
                 <p className="text-sm font-normal mb-4">
-                  I assume the following elements are <b>mostly</b> captured by
-                  the dropdowns above, but here's a list for completeness...
+                  The following elements are <i>sorta</i> captured by the
+                  questions above, but here's a list for completeness...
                 </p>
                 <ul className="text-xs font-normal text-left list-disc ml-4 lg:ml-6 space-y-0">
                   <li>Go-to-market strategy</li>
@@ -952,18 +975,13 @@ const ViableStartupCalculator: React.FC = () => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Carta industry seed round data
+                      Carta data
                     </a>
                     )
                   </li>
                   <li>Moat analysis</li>
-                  <li>
-                    Type of solution: hardware, software, consumable,
-                    consulting, etc.
-                  </li>
-                  <li>
-                    Nature of solution: system of record/engagement/decision
-                  </li>
+                  <li>Solution: hardware, software, etc.</li>
+                  <li>Solution type: system of record, engagement, decision</li>
                   <li>
                     Social atomic unit (see{" "}
                     <a
@@ -977,45 +995,30 @@ const ViableStartupCalculator: React.FC = () => {
                     )
                   </li>
                   <li>
-                    Unit economics (or CAC/LTV) (see Hustle Fund{" "}
-                    <a
-                      href="https://www.hustlefund.vc/blog-posts-founders/the-mechanics-of-unit-economics"
-                      className="underline"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      here
-                    </a>{" "}
-                    and{" "}
+                    Unit economics (or CAC/LTV) (see{" "}
                     <a
                       href="https://www.hustlefund.vc/blog-posts-founders/top-of-mind-why-unit-economics-matter"
                       className="underline"
                       target="_blank"
                       rel="noreferrer"
                     >
-                      here
+                      Hustle Fund
                     </a>
                     )
                   </li>
                 </ul>
-                <h2 className="my-4">Interesting</h2>
+                <h2 className="my-4">This Calculator is Wrong!</h2>
                 <p className="text-sm font-normal">
-                  What happens if you set a result target (e.g. 4) and back out
-                  the business characteristics? Does this align with your
-                  intuition?
-                </p>
-                <div className="text-xs font-normal">
-                  (In his{" "}
+                  See{" "}
                   <a
-                    href="https://www.youtube.com/watch?v=otbnC2zE2rw"
+                    href="https://longform.asmartbear.com/problem/"
                     className="underline"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    conference talk
-                  </a>{" "}
-                  Jason compares his analysis to a constraint solver problem)
-                </div>
+                    exceptions
+                  </a>
+                </p>
               </div>
             </div>
           </div>
